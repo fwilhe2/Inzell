@@ -3,57 +3,76 @@ package net.utnik.sp.incell
 /**
  * Created by sputnik on 07.02.15.
  */
-
-data abstract class Cell() {
-    abstract fun evaluate(): Double
-}
-
-data class CellX (val content: () -> Double) : Cell() {
-    override fun evaluate(): Double {
-        return content.invoke()
+class Column(val title: String, val content: (Int) -> Double) {
+    fun eval(i: Int): Double {
+        return content.invoke(i)
     }
 }
 
-data class CellY(val content: (Double, Double) -> Double) : Cell() {
-    override fun evaluate(): Double {
-        return content.invoke(.1, .2)
-    }
-}
+class Sheet(var content: List<Column>) {
+    fun print() {
 
-data class Column(val content: List<Cell>)
+        for (c in content) {
+            print("\t\t${c.title}")
+        }
 
-data class Sheet(var content: List<Column>) {
+        println()
 
-    fun evaluate() {
-        for (column in content) {
-            for (cell in column.content) {
-                print("${cell.evaluate()}\t")
+        for (i in 0..10) {
+            for (c in content) {
+
+                print("\t\t${c.eval(i)}")
             }
             println()
         }
     }
-
 }
 
-fun add(): (Double, Double) -> Double = {(x: Double, y: Double): Double -> x + y }
+fun powerOfTwo(x: Int): Double {
+    if (x == 0)
+        return 1.0;
+    else
+        return powerOfTwo(x - 1) * 2.0
+}
+
 
 fun main(args: Array<String>) {
 
-    var numberOfCpus: Column = Column(linkedListOf(CellX({ 1.0 }), CellX({ 2.0 }))) // todo function for power of two
-    var nX: Column = Column(linkedListOf(CellX({ 100.0 })))
-    var nY: Column = Column(linkedListOf(CellX({ 100.0 })))
-    var tA: Column = Column(linkedListOf(CellX({ 10.0 })))
-    var numberOfOperations: Column = Column(linkedListOf(CellX({ 5.0 })))
-    var tK: Column = Column(linkedListOf(CellX({ 200.0 })))
-    var tP: Column = Column(linkedListOf())
-    var tS: Column = Column(linkedListOf())
-    var speedup: Column = Column(linkedListOf())
-    var effizienz: Column = Column(linkedListOf())
-    //var b: Column = Column(linkedListOf(CellY(add())))
+    var numberOfCpus: Column = Column("Number of CPUs", ::powerOfTwo)
 
-    var sheet = Sheet(linkedListOf(numberOfCpus, nX, nY, tA, numberOfOperations, tK, tP, tS, speedup, effizienz))
+    var nX: Column = Column("Problem Size X-Dimension", { 100.0 })
+    var nY: Column = Column("Problem Size Y-Dimension", { 100.0 })
+    var tA: Column = Column("Calculation Time per Cell", { 10.0 })
+    var numberOfOperations: Column = Column("Number of Operations", { 1.0 })
+    var tK: Column = Column("Communication Time per Cell", { 200.0 })
 
-    println(sheet)
+    fun timeParallel(x: Int): Double {
+        return (nX.eval(x) / numberOfCpus.eval(x)) * // Slice for each CPU
+                nY.eval(x) * // Whole Y-Dimension of the problem
+                tA.eval(x) * numberOfOperations.eval(x) + // Time to calculate each cell
+                tK.eval(x) * numberOfCpus.eval(x) // Communication increases with number of CPUs
+    }
 
-    sheet.evaluate()
+
+    var tP: Column = Column("Parallel Time", ::timeParallel)
+
+    fun timeSequential(x: Int): Double {
+        return nX.eval(x) * nY.eval(x) * tA.eval(x) * numberOfOperations.eval(x)
+    }
+
+    var tS: Column = Column("Sequential Time", ::timeSequential)
+
+    fun calculateSpeedup(x: Int): Double {
+        return timeSequential(x) / timeParallel(x)
+    }
+
+    fun calculateEfficiency(x: Int): Double {
+        return calculateSpeedup(x) / numberOfCpus.eval(x)
+    }
+
+    var speedup: Column = Column("Speedup", ::calculateSpeedup)
+    var efficiency: Column = Column("Efficiency", ::calculateEfficiency)
+
+    var sheet = Sheet(linkedListOf(numberOfCpus, nX, nY, tA, numberOfOperations, tK, tP, tS, speedup, efficiency))
+    sheet.print()
 }
