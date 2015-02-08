@@ -26,7 +26,7 @@ class Sheet(val numberOfRows: Int, var content: Array<Column>) {
     }
 }
 
-fun runSheet(columns :Array<Column>, numberOfRows: Int = 10) {
+fun runSheet(columns: Array<Column>, numberOfRows: Int = 10) {
     val sheet = Sheet(numberOfRows, columns)
     sheet.print()
 }
