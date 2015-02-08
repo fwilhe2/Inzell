@@ -17,7 +17,6 @@ class Sheet(val numberOfRows: Int, var content: Array<Column>) {
         }
         println()
         for (i in 0..(numberOfRows - 1)) {
-            //TODO what if f(0) is not defined?
             for (c in content) {
                 print("${c.eval(i)};")
             }
