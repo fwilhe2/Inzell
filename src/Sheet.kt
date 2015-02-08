@@ -10,17 +10,23 @@ class Column(val title: String, val content: (Int) -> Double) {
     }
 }
 
-class Sheet(vararg var content: Column) {
+class Sheet(val numberOfRows: Int, var content: Array<Column>) {
     fun print() {
         for (c in content) {
             print("${c.title};")
         }
         println()
-        for (i in 0..10) { //TODO what if f(0) is not defined?
+        for (i in 0..(numberOfRows - 1)) {
+            //TODO what if f(0) is not defined?
             for (c in content) {
                 print("${c.eval(i)};")
             }
             println()
         }
     }
+}
+
+fun runSheet(columns :Array<Column>, numberOfRows: Int = 10) {
+    val sheet = Sheet(numberOfRows, columns)
+    sheet.print()
 }

@@ -25,16 +25,19 @@ fun main(args: Array<String>) {
                 tA.eval(x) * numberOfOperations.eval(x) + // Time to calculate each cell
                 tK.eval(x) * numberOfCpus.eval(x) // Communication increases with number of CPUs
     }
+
     val tP: Column = Column("Parallel Time", ::timeParallel)
 
     fun timeSequential(x: Int): Double {
         return nX.eval(x) * nY.eval(x) * tA.eval(x) * numberOfOperations.eval(x)
     }
+
     val tS: Column = Column("Sequential Time", ::timeSequential)
 
     fun calculateSpeedup(x: Int): Double {
         return timeSequential(x) / timeParallel(x)
     }
+
     val speedup: Column = Column("Speedup", ::calculateSpeedup)
 
     fun calculateEfficiency(x: Int): Double {
@@ -42,6 +45,5 @@ fun main(args: Array<String>) {
     }
     val efficiency: Column = Column("Efficiency", ::calculateEfficiency)
 
-    val sheet = Sheet(numberOfCpus, nX, nY, tA, numberOfOperations, tK, tP, tS, speedup, efficiency)
-    sheet.print()
+    runSheet(array(numberOfCpus, nX, nY, tA, numberOfOperations, tK, tP, tS, speedup, efficiency), 10)
 }
