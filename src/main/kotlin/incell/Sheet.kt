@@ -1,8 +1,4 @@
-package net.utnik.sp.incell
-
-/**
- * Created by sputnik on 08.02.15.
- */
+package incell
 
 class Column(val title: String, val content: (Int) -> Double) {
     fun eval(i: Int): Double {

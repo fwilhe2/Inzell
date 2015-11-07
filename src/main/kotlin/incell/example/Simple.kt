@@ -1,11 +1,7 @@
-package net.utnik.sp.incell.demo.simple
+package incell.example
 
-import net.utnik.sp.incell.Column
-import net.utnik.sp.incell.runSheet
-
-/**
- * Created by sputnik on 08.02.15.
- */
+import incell.Column
+import incell.runSheet
 
 fun count(x: Int): Double {
     return x * 1.0 //TODO Another way to cast to double?
@@ -33,5 +29,5 @@ fun main(args: Array<String>) {
     val arbitraryValue: Column = Column("Arbitrary Value", ::arbitrary)
     val evenValue: Column = Column("Even Value", ::onlyWhenEven)
 
-    runSheet(array(countUp, constantValue, arbitraryValue, evenValue))
+    runSheet(arrayOf(countUp, constantValue, arbitraryValue, evenValue))
 }

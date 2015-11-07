@@ -1,11 +1,7 @@
-package net.utnik.sp.incell.demo.performance
+package incell.example
 
-import net.utnik.sp.incell.Column
-import net.utnik.sp.incell.runSheet
-
-/**
- * Created by sputnik on 07.02.15.
- */
+import incell.Column
+import incell.runSheet
 
 fun powerOfTwo(x: Int): Double {
     if (x == 0)
@@ -48,5 +44,5 @@ fun main(args: Array<String>) {
     }
     val efficiency: Column = Column("Efficiency", ::calculateEfficiency)
 
-    runSheet(array(numberOfCpus, nX, nY, tA, numberOfOperations, tK, tP, tS, speedup, efficiency), 10)
+    runSheet(arrayOf(numberOfCpus, nX, nY, tA, numberOfOperations, tK, tP, tS, speedup, efficiency), 10)
 }
