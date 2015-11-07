@@ -4,7 +4,7 @@ import incell.Column
 import incell.runSheet
 
 fun count(x: Int): Double {
-    return x * 1.0 //TODO Another way to cast to double?
+    return x.toDouble()
 }
 
 fun arbitrary(x: Int): Double {
@@ -23,11 +23,14 @@ fun onlyWhenEven(x: Int): Double {
     return -1.0
 }
 
+fun sine(x: Int): Double = Math.sin(x.toDouble())
+
 fun main(args: Array<String>) {
     val countUp: Column = Column("Count", ::count)
     val constantValue: Column = Column("Constant Value", { 42.23 })
     val arbitraryValue: Column = Column("Arbitrary Value", ::arbitrary)
     val evenValue: Column = Column("Even Value", ::onlyWhenEven)
+    val sine: Column = Column("sin()", ::sine)
 
-    runSheet(arrayOf(countUp, constantValue, arbitraryValue, evenValue))
+    runSheet(arrayOf(countUp, constantValue, arbitraryValue, evenValue, sine))
 }
