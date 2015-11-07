@@ -1,11 +1,6 @@
 package incell.example
 
-import incell.Column
-import incell.runSheet
-
-fun count(x: Int): Double {
-    return x.toDouble()
-}
+import incell.*
 
 fun arbitrary(x: Int): Double {
     when (x) {
@@ -15,22 +10,14 @@ fun arbitrary(x: Int): Double {
     }
 }
 
-fun onlyWhenEven(x: Int): Double {
-    when {
-        x % 2 == 0 -> return 1.0
-        x % 2 == 1 -> return 0.0
-    }
-    return -1.0
-}
-
-fun sine(x: Int): Double = Math.sin(x.toDouble())
-
 fun main(args: Array<String>) {
     val countUp: Column = Column("Count", ::count)
     val constantValue: Column = Column("Constant Value", { 42.23 })
     val arbitraryValue: Column = Column("Arbitrary Value", ::arbitrary)
-    val evenValue: Column = Column("Even Value", ::onlyWhenEven)
+    val evenValue: Column = Column("Even Value", ::isEven)
     val sine: Column = Column("sin()", ::sine)
+    val cosine: Column = Column("cos()", ::cosine)
+    val random: Column = Column("Random", ::random)
 
-    runSheet(arrayOf(countUp, constantValue, arbitraryValue, evenValue, sine))
+    runSheet(arrayOf(countUp, constantValue, arbitraryValue, evenValue, sine, cosine, random))
 }

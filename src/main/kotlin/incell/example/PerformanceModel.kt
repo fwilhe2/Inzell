@@ -1,14 +1,8 @@
 package incell.example
 
 import incell.Column
+import incell.powerOfTwo
 import incell.runSheet
-
-fun powerOfTwo(x: Int): Double {
-    if (x == 0)
-        return 1.0
-    else
-        return powerOfTwo(x - 1) * 2.0
-}
 
 fun main(args: Array<String>) {
     val numberOfCpus: Column = Column("Number of CPUs", ::powerOfTwo)
