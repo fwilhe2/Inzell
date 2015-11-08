@@ -8,3 +8,9 @@ fun cosine(x: Int): Double = Math.cos(x.toDouble())
 fun log(x: Int): Double = Math.log(x.toDouble())
 fun random(x: Int): Double = Math.random()
 fun powerOfTwo(x: Int): Double = Math.pow(x.toDouble(), 2.0)
+
+fun extractFrom(function: (Int) -> Double, lowerIndex: Int, upperIndex: Int, results: List<Double> = arrayListOf()): DoubleArray {
+    if (lowerIndex > upperIndex) return results.toDoubleArray()
+
+    return extractFrom(function, lowerIndex + 1, upperIndex, results + function(lowerIndex))
+}

@@ -8,9 +8,7 @@ class Column(val title: String, val content: (Int) -> Double) {
 
 class Sheet(val numberOfRows: Int, var content: Array<Column>) {
     fun print() {
-        for (c in content) {
-            print("${c.title};")
-        }
+        content.forEach { c -> print("${c.title};") }
         println()
         for (i in 0..(numberOfRows - 1)) {
             for (c in content) {
