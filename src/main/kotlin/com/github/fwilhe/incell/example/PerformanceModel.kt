@@ -1,8 +1,8 @@
-package incell.example
+package com.github.fwilhe.incell.example
 
-import incell.Column
-import incell.powerOfTwo
-import incell.runSheet
+import com.github.fwilhe.incell.Column
+import com.github.fwilhe.incell.powerOfTwo
+import com.github.fwilhe.incell.runSheet
 
 fun main(args: Array<String>) {
     val numberOfCpus: Column = Column("Number of CPUs", ::powerOfTwo)

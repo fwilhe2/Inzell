@@ -1,6 +1,6 @@
-package incell.example
+package com.github.fwilhe.incell.example
 
-import incell.*
+import com.github.fwilhe.incell.*
 
 fun arbitrary(x: Int): Double {
     when (x) {

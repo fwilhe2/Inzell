@@ -1,4 +1,4 @@
-package incell
+package com.github.fwilhe.incell
 
 class Column(val title: String, val content: (Int) -> Double) {
     fun eval(i: Int): Double {

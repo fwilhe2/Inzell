@@ -1,4 +1,4 @@
-package incell
+package com.github.fwilhe.incell
 
 fun isEven(x: Int): Double = if (x.mod(2).equals(0)) 1.0 else 0.0
 fun count(x: Int): Double = x.toDouble()
@@ -12,5 +12,5 @@ fun powerOfTwo(x: Int): Double = Math.pow(x.toDouble(), 2.0)
 fun extractFrom(function: (Int) -> Double, lowerIndex: Int, upperIndex: Int, results: List<Double> = arrayListOf()): DoubleArray {
     if (lowerIndex > upperIndex) return results.toDoubleArray()
 
-    return extractFrom(function, lowerIndex + 1, upperIndex, results + function(lowerIndex))
+    return com.github.fwilhe.incell.extractFrom(function, lowerIndex + 1, upperIndex, results + function(lowerIndex))
 }
