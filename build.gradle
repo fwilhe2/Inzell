@@ -6,14 +6,15 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.0.0-beta-1103'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.0.0-beta-2423'
     }
 }
 
 apply plugin: "kotlin"
-apply plugin: 'application'
+apply plugin: "application"
 
-mainClassName = "incell.example.SimpleKt"
+mainClassName = "com.github.fwilhe.incell.example.SimpleKt"
+
 repositories {
     mavenCentral()
     maven {
@@ -23,8 +24,7 @@ repositories {
 
 dependencies {
     compile(
-            'org.jetbrains.kotlin:kotlin-stdlib:1.0.0-beta-1103',
-            'com.jcabi:jcabi-aspects:0.22.2'
+            'org.jetbrains.kotlin:kotlin-stdlib:1.0.0-beta-2423'
     )
 
 }
