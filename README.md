@@ -27,6 +27,19 @@ The default behavior is to write the CSV-data to stdout, which allows to put the
 
 For complete examples, please refer to the `example` package.
 
+## Building
+
+To build a jar, type `./gradlew jar` in the project root.
+This does not contain the kotlin runtime.
+
+## Running
+
+To run a demo spreadsheet, type `./gradlew run` in the project root.
+Another demo is available (`PerformanceModel.kt`).
+To run it, change the `mainClassName` in `build.gradle`.
+
+You can also use IntelliJ IDEA with the kotlin plugin to run those.
+
 ## License
 
 This software is written by Florian Wilhelm and available under the MIT license (see `LICENSE` for details)
