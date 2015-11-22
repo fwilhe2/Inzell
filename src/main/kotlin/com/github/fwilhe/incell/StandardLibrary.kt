@@ -5,7 +5,9 @@ fun count(x: Int): Double = x.toDouble()
 
 fun sine(x: Int): Double = Math.sin(x.toDouble())
 fun cosine(x: Int): Double = Math.cos(x.toDouble())
-fun log(x: Int): Double = Math.log(x.toDouble())
+fun tangent(x: Int): Double = Math.tan(x.toDouble())
+fun logarithm(x: Int): Double = Math.log(x.toDouble())
+fun absolute(x: Int): Double = Math.abs(x.toDouble())
 fun random(x: Int): Double = Math.random()
 fun powerOfTwo(x: Int): Double = Math.pow(x.toDouble(), 2.0)
 

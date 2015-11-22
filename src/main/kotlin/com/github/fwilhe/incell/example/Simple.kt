@@ -21,9 +21,12 @@ fun main(args: Array<String>) {
     val evenValue: Column = Column("Even Value", ::isEven)
     val sine: Column = Column("sin()", ::sine)
     val cosine: Column = Column("cos()", ::cosine)
+    val tangent: Column = Column("tan()", ::tangent)
+    val logarithm: Column = Column("log()", ::logarithm)
+    val absolute: Column = Column("abs()", ::absolute)
     val random: Column = Column("Random", ::random)
 
     val someValues: DoubleArray = extractFrom(::count, 3, 6)
 
-    runSheet(arrayOf(countUp, constantValue, arbitraryValue, evenValue, sine, cosine, random))
+    runSheet(arrayOf(countUp, constantValue, arbitraryValue, evenValue, sine, cosine, tangent, logarithm, absolute, random))
 }
