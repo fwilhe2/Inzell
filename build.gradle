@@ -6,7 +6,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.0.0'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.0.2'
     }
 }
 
@@ -24,7 +24,7 @@ repositories {
 
 dependencies {
     compile(
-            'org.jetbrains.kotlin:kotlin-stdlib:1.0.0'
+            'org.jetbrains.kotlin:kotlin-stdlib:1.0.2'
     )
 
 }
