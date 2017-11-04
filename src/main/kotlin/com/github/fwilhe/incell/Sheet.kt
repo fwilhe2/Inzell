@@ -1,12 +1,12 @@
 package com.github.fwilhe.incell
 
-class Column(val title: String, val function: (Int) -> Double) {
+class Column(val title: String, private val function: (Int) -> Double) {
     fun eval(i: Int): Double {
         return function.invoke(i)
     }
 }
 
-class Sheet(val numberOfRows: Int, var columns: Array<Column>) {
+class Sheet(private val numberOfRows: Int, private var columns: Array<Column>) {
     fun print() {
         columns.forEach { c -> print("${c.title};") }
         println()

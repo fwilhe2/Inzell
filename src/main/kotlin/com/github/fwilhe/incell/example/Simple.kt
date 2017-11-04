@@ -3,10 +3,10 @@ package com.github.fwilhe.incell.example
 import com.github.fwilhe.incell.*
 
 fun arbitrary(x: Int): Double {
-    when (x) {
-        in 0..3 -> return 42.0
-        in 5..7 -> return 2.4
-        else -> return 1.0
+    return when (x) {
+        in 0..3 -> 42.0
+        in 5..7 -> 2.4
+        else -> 1.0
     }
 }
 

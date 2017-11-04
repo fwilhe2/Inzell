@@ -1,6 +1,6 @@
 package com.github.fwilhe.incell
 
-fun isEven(x: Int): Double = if (x.mod(2).equals(0)) 1.0 else 0.0
+fun isEven(x: Int): Double = if (x.rem(2) == 0) 1.0 else 0.0
 fun count(x: Int): Double = x.toDouble()
 
 fun sine(x: Int): Double = Math.sin(x.toDouble())
