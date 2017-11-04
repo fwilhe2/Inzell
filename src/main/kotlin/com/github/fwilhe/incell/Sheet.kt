@@ -6,7 +6,7 @@ class Column(val title: String, private val function: (Int) -> Double) {
     }
 }
 
-class Sheet(private val numberOfRows: Int, private var columns: List<Column>) {
+class Sheet(private val numberOfRows: Int, private val columns: List<Column>) {
     fun print() {
         columns.forEach { c -> print("${c.title};") }
         println()
