@@ -6,7 +6,7 @@ class Column(val title: String, private val function: (Int) -> Double) {
     }
 }
 
-class Sheet(private val numberOfRows: Int, private var columns: Array<Column>) {
+class Sheet(private val numberOfRows: Int, private var columns: List<Column>) {
     fun print() {
         columns.forEach { c -> print("${c.title};") }
         println()
@@ -19,7 +19,27 @@ class Sheet(private val numberOfRows: Int, private var columns: Array<Column>) {
     }
 }
 
-fun runSheet(columns: Array<Column>, numberOfRows: Int = 10) {
-    val sheet = Sheet(numberOfRows, columns)
-    sheet.print()
+fun spreadsheet(): SpreadSheetBuilder {
+    return SpreadSheetBuilder()
+
+}
+
+class SpreadSheetBuilder {
+
+    private val columns = mutableListOf<Column>()
+
+    fun addColumn(column: Column): SpreadSheetBuilder {
+        columns.add(column)
+        return this
+    }
+
+    fun addColumns(newColumns: List<Column>): SpreadSheetBuilder {
+        columns.addAll(newColumns)
+        return this
+    }
+
+    fun build() {
+        val sheet = Sheet(10, columns)
+        sheet.print()
+    }
 }

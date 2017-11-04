@@ -11,16 +11,17 @@ fun arbitrary(x: Int): Double {
 }
 
 fun main(args: Array<String>) {
-    val countUp: Column = Column("Count", ::count)
-    val constantValue: Column = Column("Constant Value", { 42.23 })
-    val arbitraryValue: Column = Column("Arbitrary Value", ::arbitrary)
-    val evenValue: Column = Column("Even Value", ::isEven)
-    val sine: Column = Column("sin()", ::sine)
-    val cosine: Column = Column("cos()", ::cosine)
-    val tangent: Column = Column("tan()", ::tangent)
-    val logarithm: Column = Column("log()", ::logarithm)
-    val absolute: Column = Column("abs()", ::absolute)
-    val random: Column = Column("Random", ::random)
-
-    runSheet(arrayOf(countUp, constantValue, arbitraryValue, evenValue, sine, cosine, tangent, logarithm, absolute, random))
+    spreadsheet()
+            .addColumn(Column("Count", ::count))
+            .addColumn(Column("Constant Value", { 42.23 }))
+            .addColumn(Column("Arbitrary Value", ::arbitrary))
+            .addColumn(Column("Even Value", ::isEven))
+            .addColumn(Column("sin()", ::sine))
+            .addColumn(Column("cos()", ::cosine))
+            .addColumn(Column("tan()", ::tangent))
+            .addColumn(Column("log()", ::logarithm))
+            .addColumn(Column("abs()", ::absolute))
+            .addColumn(Column("Random", ::random))
+            .build()
 }
+

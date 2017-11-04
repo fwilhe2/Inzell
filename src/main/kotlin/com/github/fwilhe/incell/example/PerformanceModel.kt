@@ -2,7 +2,7 @@ package com.github.fwilhe.incell.example
 
 import com.github.fwilhe.incell.Column
 import com.github.fwilhe.incell.powerOfTwo
-import com.github.fwilhe.incell.runSheet
+import com.github.fwilhe.incell.spreadsheet
 
 fun main(args: Array<String>) {
     val numberOfCpus: Column = Column("Number of CPUs", ::powerOfTwo)
@@ -38,5 +38,5 @@ fun main(args: Array<String>) {
     }
     val efficiency: Column = Column("Efficiency", ::calculateEfficiency)
 
-    runSheet(arrayOf(numberOfCpus, nX, nY, tA, numberOfOperations, tK, tP, tS, speedup, efficiency), 10)
+    spreadsheet().addColumns(listOf(numberOfCpus, nX, nY, tA, numberOfOperations, tK, tP, tS, speedup, efficiency)).build()
 }
