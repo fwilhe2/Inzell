@@ -38,8 +38,7 @@ class SpreadSheetBuilder {
         return this
     }
 
-    fun build() {
-        val sheet = Sheet(10, columns)
-        sheet.print()
+    fun build(): Sheet {
+        return Sheet(10, columns)
     }
 }
