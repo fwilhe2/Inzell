@@ -6,8 +6,8 @@ class Column(val title: String, private val function: (Int) -> Double) {
     }
 }
 
-class Sheet(private val numberOfRows: Int, private val columns: List<Column>) {
-    fun print() {
+class Sheet(private val columns: List<Column>) {
+    fun print(numberOfRows: Int = 10) {
         columns.forEach { c -> print("${c.title};") }
         println()
         for (i in 0..(numberOfRows - 1)) {
@@ -39,6 +39,6 @@ class SpreadSheetBuilder {
     }
 
     fun build(): Sheet {
-        return Sheet(10, columns)
+        return Sheet(columns)
     }
 }

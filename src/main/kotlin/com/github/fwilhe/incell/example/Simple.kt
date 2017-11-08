@@ -23,6 +23,5 @@ fun main(args: Array<String>) {
             .addColumn(Column("abs()", ::absolute))
             .addColumn(Column("Random", ::random))
             .build()
-            .print()
+            .print(3)
 }
-
