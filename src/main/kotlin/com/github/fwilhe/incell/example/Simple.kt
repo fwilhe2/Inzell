@@ -24,4 +24,13 @@ fun main(args: Array<String>) {
             .addColumn(Column("Random", ::random))
             .build()
             .print(3)
+
+    val average = spreadsheet()
+            .addColumn(Column("sin()", ::sine))
+            .addColumn(Column("cos()", ::cosine))
+            .addColumn(Column("tan()", ::tangent))
+            .build()
+            .row(4)
+            .average()
+    println("The average is $average")
 }

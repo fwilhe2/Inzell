@@ -17,6 +17,10 @@ class Sheet(private val columns: List<Column>) {
             println()
         }
     }
+
+    fun row(index: Int): List<Double> {
+        return columns.map { it.eval(index) }
+    }
 }
 
 fun spreadsheet(): SpreadSheetBuilder {
