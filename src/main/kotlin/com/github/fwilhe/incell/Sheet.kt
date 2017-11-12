@@ -23,26 +23,24 @@ class Sheet(private val columns: List<Column>) {
     }
 }
 
-fun spreadsheet(): SpreadSheetBuilder {
-    return SpreadSheetBuilder()
+fun spreadsheet(builder: Spreadsheet.() -> Unit): Sheet {
+    val columns = mutableListOf<Column>()
+    object : Spreadsheet {
 
+        override fun column(title: String, function: (Int) -> Double) {
+            columns.add(Column(title, function))
+        }
+
+        override fun add(column: Column) {
+            columns.add(column)
+        }
+
+    }.builder()
+
+    return Sheet(columns)
 }
 
-class SpreadSheetBuilder {
-
-    private val columns = mutableListOf<Column>()
-
-    fun addColumn(column: Column): SpreadSheetBuilder {
-        columns.add(column)
-        return this
-    }
-
-    fun addColumns(newColumns: List<Column>): SpreadSheetBuilder {
-        columns.addAll(newColumns)
-        return this
-    }
-
-    fun build(): Sheet {
-        return Sheet(columns)
-    }
+interface Spreadsheet {
+    fun column(title: String, function: (Int) -> Double)
+    fun add(column: Column)
 }

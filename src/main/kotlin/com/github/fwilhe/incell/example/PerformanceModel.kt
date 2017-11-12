@@ -39,8 +39,16 @@ fun main(args: Array<String>) {
 
     val efficiency = Column("Efficiency", ::calculateEfficiency)
 
-    spreadsheet()
-            .addColumns(listOf(numberOfCpus, nX, nY, tA, numberOfOperations, tK, tP, tS, speedup, efficiency))
-            .build()
-            .print()
+    spreadsheet {
+        add(numberOfCpus)
+        add(nX)
+        add(nY)
+        add(tA)
+        add(numberOfOperations)
+        add(tK)
+        add(tP)
+        add(tS)
+        add(speedup)
+        add(efficiency)
+    }.print()
 }

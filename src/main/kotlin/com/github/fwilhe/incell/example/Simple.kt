@@ -11,26 +11,20 @@ fun arbitrary(x: Int): Double {
 }
 
 fun main(args: Array<String>) {
-    spreadsheet()
-            .addColumn(Column("Count", ::count))
-            .addColumn(Column("Constant Value", { 42.23 }))
-            .addColumn(Column("Arbitrary Value", ::arbitrary))
-            .addColumn(Column("Even Value", ::isEven))
-            .addColumn(Column("sin()", ::sine))
-            .addColumn(Column("cos()", ::cosine))
-            .addColumn(Column("tan()", ::tangent))
-            .addColumn(Column("log()", ::logarithm))
-            .addColumn(Column("abs()", ::absolute))
-            .addColumn(Column("Random", ::random))
-            .build()
-            .print(3)
+    spreadsheet {
+        column("Count", ::count)
+        column("Constant Value", { 10.0 })
+        column("Arbitrary Value", ::arbitrary)
+        column("Is even", ::isEven)
+        column("abs()", ::absolute)
+        column("Random", ::random)
+    }.print(3)
 
-    val average = spreadsheet()
-            .addColumn(Column("sin()", ::sine))
-            .addColumn(Column("cos()", ::cosine))
-            .addColumn(Column("tan()", ::tangent))
-            .build()
-            .row(4)
-            .average()
+    val average = spreadsheet {
+        column("sin()", ::sine)
+        column("cos()", ::cosine)
+        column("tan()", ::tangent)
+    }.row(6).average()
     println("The average is $average")
 }
+
