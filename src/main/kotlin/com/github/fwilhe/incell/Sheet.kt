@@ -8,13 +8,9 @@ class Column(val title: String, private val function: (Int) -> Double) {
 
 class Sheet(private val columns: List<Column>) {
     fun print(numberOfRows: Int = 10) {
-        columns.forEach { c -> print("${c.title};") }
-        println()
-        for (i in 0..(numberOfRows - 1)) {
-            for (c in columns) {
-                print("${c.eval(i)};")
-            }
-            println()
+        println(columns.joinToString(separator = ";") { column -> column.title })
+        repeat(numberOfRows) { row ->
+            println(columns.map { column -> column.eval(row) }.joinToString(separator = ";"))
         }
     }
 
