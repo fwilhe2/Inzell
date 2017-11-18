@@ -1,9 +1,7 @@
 package com.github.fwilhe.incell
 
 class Column(val title: String, private val function: (Int) -> Double) {
-    fun eval(i: Int): Double {
-        return function.invoke(i)
-    }
+    fun eval(i: Int): Double = function.invoke(i)
 }
 
 class Sheet(private val columns: List<Column>) {
@@ -14,9 +12,7 @@ class Sheet(private val columns: List<Column>) {
         }
     }
 
-    fun row(index: Int): List<Double> {
-        return columns.map { it.eval(index) }
-    }
+    fun row(index: Int): List<Double> = columns.map { it.eval(index) }
 }
 
 fun spreadsheet(builder: Spreadsheet.() -> Unit): Sheet {

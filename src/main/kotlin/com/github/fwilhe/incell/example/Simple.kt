@@ -2,12 +2,10 @@ package com.github.fwilhe.incell.example
 
 import com.github.fwilhe.incell.*
 
-fun arbitrary(x: Int): Double {
-    return when (x) {
-        in 0..3 -> 42.0
-        in 5..7 -> 2.4
-        else -> 1.0
-    }
+fun arbitrary(x: Int): Double = when (x) {
+    in 0..3 -> 42.0
+    in 5..7 -> 2.4
+    else -> 1.0
 }
 
 fun main(args: Array<String>) {
@@ -27,4 +25,3 @@ fun main(args: Array<String>) {
     }.row(6).average()
     println("The average is $average")
 }
-
