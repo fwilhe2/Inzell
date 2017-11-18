@@ -1,7 +1,18 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.2'
+    }
+}
+
 plugins {
     id 'application'
     id "org.jetbrains.kotlin.jvm" version "1.1.60"
 }
+
+apply plugin: 'org.junit.platform.gradle.plugin'
 
 mainClassName = 'com.github.fwilhe.incell.example.SimpleKt'
 
@@ -9,6 +20,10 @@ repositories {
     mavenCentral()
 }
 
+ext.junitJupiterVersion  = '5.0.2'
+
 dependencies {
     compile 'org.jetbrains.kotlin:kotlin-stdlib:1.1.60'
+    testCompile("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
+    testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
 }
