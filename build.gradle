@@ -27,6 +27,7 @@ dependencies {
     compile 'org.jetbrains.kotlin:kotlin-stdlib:1.2.20'
     testCompile("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
     testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
+    testCompile("org.junit.jupiter:junit-jupiter-params:${junitJupiterVersion}")
 }
 
 publishing {
