@@ -16,6 +16,7 @@ fun main(args: Array<String>) {
         column("Is even", ::isEven)
         column("abs()", ::absolute)
         column("Random", ::random)
+        column("From Array", fromArray(arrayOf(1.0,2.0,3.0)))
     }.print(3)
 
     val average = spreadsheet {

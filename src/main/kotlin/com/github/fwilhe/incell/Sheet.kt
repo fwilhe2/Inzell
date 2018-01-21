@@ -36,3 +36,8 @@ interface Spreadsheet {
     fun column(title: String, function: (Int) -> Double)
     fun add(column: Column)
 }
+
+//todo handle case when i >= values.size()
+fun fromArray(values: Array<Double>): (Int) -> Double = { i: Int ->
+    values[i]
+}
