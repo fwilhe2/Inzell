@@ -1,6 +1,8 @@
 package com.github.fwilhe.incell
 
-class Column(val title: String, private val function: (Int) -> Double) {
+typealias columnFunction = (Int) -> Double
+
+class Column(val title: String, private val function: columnFunction) {
     fun eval(i: Int): Double = function.invoke(i)
 }
 
@@ -19,7 +21,7 @@ fun spreadsheet(builder: Spreadsheet.() -> Unit): Sheet {
     val columns = mutableListOf<Column>()
     object : Spreadsheet {
 
-        override fun column(title: String, function: (Int) -> Double) {
+        override fun column(title: String, function: columnFunction) {
             columns.add(Column(title, function))
         }
 
@@ -33,11 +35,11 @@ fun spreadsheet(builder: Spreadsheet.() -> Unit): Sheet {
 }
 
 interface Spreadsheet {
-    fun column(title: String, function: (Int) -> Double)
+    fun column(title: String, function: columnFunction)
     fun add(column: Column)
 }
 
 //todo handle case when i >= values.size()
-fun fromArray(values: Array<Double>): (Int) -> Double = { i: Int ->
+fun fromArray(values: Array<Double>): columnFunction = { i: Int ->
     values[i]
 }
