@@ -16,17 +16,19 @@ internal class SheetTest {
 
     @ParameterizedTest
     @ValueSource(ints = [0, 1, 2])
-    fun fromArrayTest(i: Int) {
+    fun functionOfArray(i: Int) {
 
         fun expected(x: Int): Double = when (x) {
             0 -> 2.3
             1 -> 1.3
             2 -> 7.2
-            else -> throw RuntimeException("Test failed, actual array has only 3 entries.")
+            else -> throw RuntimeException("Test failed, actual array/list has only 3 entries.")
         }
 
-        val actual: columnFunction = fromArray(arrayOf(2.3, 1.3, 7.2))
+        val actualArray: columnFunction = buildFunctionOf(arrayOf(2.3, 1.3, 7.2))
+        val actualList: columnFunction = buildFunctionOf(listOf(2.3, 1.3, 7.2))
 
-        assertEquals(expected(i), actual(i))
+        assertEquals(expected(i), actualArray(i))
+        assertEquals(expected(i), actualList(i))
     }
 }

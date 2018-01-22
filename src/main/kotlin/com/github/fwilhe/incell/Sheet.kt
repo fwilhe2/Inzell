@@ -40,6 +40,10 @@ interface Spreadsheet {
 }
 
 //todo handle case when i >= values.size()
-fun fromArray(values: Array<Double>): columnFunction = { i: Int ->
+fun buildFunctionOf(values: Array<Double>): columnFunction = { i: Int ->
     values[i]
+}
+
+fun buildFunctionOf(values: Collection<Double>): columnFunction = { i: Int ->
+    values.elementAt(i)
 }
