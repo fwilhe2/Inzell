@@ -25,20 +25,11 @@ Column("Number of CPUs", ::powerOfTwo)
 The design goal is to hide all implementation-code from the user and allow to create easily programs to compute some data.
 The default behavior is to write the CSV-data to stdout, which allows to put the tool in a unix pipe, for example to use tools such as `csv2md`.
 
-For complete examples, please refer to the `example` package.
+For complete examples, please refer to the [example project](https://github.com/fwilhe/Incell-Examples).
 
 ## Building
 
-To build a jar, type `./gradlew jar` in the project root.
-This does not contain the kotlin runtime.
-
-## Running
-
-To run a demo spreadsheet, type `./gradlew run` in the project root.
-Another demo is available (`PerformanceModel.kt`).
-To run it, change the `mainClassName` in `build.gradle`.
-
-You can also use IntelliJ IDEA with the kotlin plugin to run those.
+To install the library to your local Maven repo, type `./gradlew publishToMavenLocal` in the project root.
 
 ## License
 
