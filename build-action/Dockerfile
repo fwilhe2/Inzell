@@ -8,9 +8,7 @@ LABEL "com.github.actions.color"="purple"
 LABEL "repository"="https://github.com/fwilhe/Incell"
 LABEL "maintainer"="fwilhe"
 
-RUN cp -r /github/workspace/* /tmp
-
-WORKDIR /tmp
+WORKDIR /github/workspace
 
 ADD entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
