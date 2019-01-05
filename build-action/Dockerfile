@@ -8,7 +8,7 @@ LABEL "com.github.actions.color"="purple"
 LABEL "repository"="https://github.com/fwilhe/Incell"
 LABEL "maintainer"="fwilhe"
 
-COPY /github/workspace/* /tmp
+RUN cp -r /github/workspace/* /tmp
 
 WORKDIR /tmp
 
