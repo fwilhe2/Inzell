@@ -4,5 +4,5 @@ workflow "Build" {
 }
 
 action "Build and test Incell" {
-  uses = "./build/"
+  uses = "./build-action/"
 }
