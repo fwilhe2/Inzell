@@ -4,4 +4,4 @@ pwd
 
 find .
 
-sh -c "gradle check --stacktrace --debug --scan"
+sh -c "gradle check --stacktrace --debug --scan --no-daemon"
