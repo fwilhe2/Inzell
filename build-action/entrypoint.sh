@@ -1,4 +1,3 @@
 #!/bin/sh -l
 
-cp -r /github/workspace/* .
-./gradlew check --no-daemon
+./gradlew check --no-daemon --scan
