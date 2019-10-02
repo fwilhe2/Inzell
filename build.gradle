@@ -23,9 +23,19 @@ test {
 }
 
 publishing {
+    repositories {
+        maven {
+            name = "Github"
+            url = uri("https://maven.pkg.github.com/fwilhe2/incell")
+            credentials {
+                username = 'fwilhe2'
+                password = System.getenv('GPR_AUTH_TOKEN')
+            }
+        }
+    }
     publications {
         maven(MavenPublication) {
-            groupId 'com.github.fwilhe.incell'
+            groupId 'com.github.fwilhe2.incell'
             artifactId 'incell'
             version '0-unreleased'
 

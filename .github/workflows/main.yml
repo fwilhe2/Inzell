@@ -11,4 +11,6 @@ jobs:
     - uses: actions/checkout@master
     - name: Run a multi-line script
       run: |
-        ./gradlew check --no-daemon --scan
+        ./gradlew check publishMavenPublicationToGithubRepository --no-daemon --scan
+      env:
+        GPR_AUTH_TOKEN: ${{secrets.GPR_AUTH_TOKEN}}
