@@ -37,7 +37,7 @@ publishing {
         maven(MavenPublication) {
             groupId 'com.github.fwilhe2.incell'
             artifactId 'incell'
-            version '0-unreleased'
+            version "0-${new Date().getTime()}-unreleased"
 
             from components.java
         }
