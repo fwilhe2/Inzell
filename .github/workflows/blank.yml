@@ -1,0 +1,13 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-18.04
+    
+    steps:
+    - name: Run a multi-line script
+      run: |
+        ./gradlew check --no-daemon --scan
