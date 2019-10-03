@@ -15,7 +15,7 @@ jobs:
         ./gradlew check
 
     - name: Publish
-      if: github.ref == 'master'
+      if: github.ref == 'refs/heads/master'
       run: |
         ./gradlew publishMavenPublicationToGithubRepository
       env:
