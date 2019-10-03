@@ -9,8 +9,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@master
-    - name: Run a multi-line script
+
+    - name: Test
       run: |
-        ./gradlew check publishMavenPublicationToGithubRepository --no-daemon --scan
+        ./gradlew check
+
+    - name: Publish
+      if: github.ref == 'master'
+      run: |
+        ./gradlew publishMavenPublicationToGithubRepository
       env:
         GPR_AUTH_TOKEN: ${{secrets.GPR_AUTH_TOKEN}}
