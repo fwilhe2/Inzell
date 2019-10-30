@@ -8,3 +8,4 @@ out/
 .settings/
 .vscode/
 bin/
+stale_outputs_checked
