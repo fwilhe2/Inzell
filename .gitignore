@@ -9,3 +9,4 @@ out/
 .vscode/
 bin/
 stale_outputs_checked
+.gradletasknamecache
