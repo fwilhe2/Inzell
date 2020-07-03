@@ -19,6 +19,7 @@ Ech `Column` has a title that is used as a header, and a function to compute its
 An example is
 
 ```
+
 Column("Number of CPUs", ::powerOfTwo)
 ```
 
