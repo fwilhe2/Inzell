@@ -14,6 +14,7 @@ class Sheet(private val columns: List<Column>) {
         }
     }
 
+                          
     fun row(index: Int): List<Double> = columns.map { it.eval(index) }
 }
 
