@@ -16,4 +16,5 @@ jobs:
         with:
           java-version: ${{ matrix.java }}
           architecture: x64
+      - run: ./gradlew -v
       - run: ./gradlew check
