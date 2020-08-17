@@ -8,6 +8,9 @@ version '0.1.0-SNAPSHOT'
 repositories {
     mavenCentral()
     jcenter()
+    maven {
+        url "https://kotlin.bintray.com/kotlinx"
+    }
 }
 
 kotlin {
@@ -15,6 +18,7 @@ kotlin {
     js {
         nodejs()
         browser()
+        binaries.executable()
     }
 
     sourceSets {
@@ -22,8 +26,7 @@ kotlin {
             dependencies {
                 implementation kotlin('stdlib-common')
                 implementation("org.jetbrains.kotlinx:kotlinx-html-js:0.7.1")
-
-
+                implementation("org.jetbrains.kotlinx:kotlinx-browser:0.2")
             }
         }
         commonTest {
