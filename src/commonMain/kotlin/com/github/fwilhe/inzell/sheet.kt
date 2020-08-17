@@ -1,4 +1,4 @@
-package com.github.fwilhe.incell
+package com.github.fwilhe.inzell
 
 typealias columnFunction = (Int) -> Double
 

@@ -1,45 +1,39 @@
 plugins {
-    id 'application'
-    id "org.jetbrains.kotlin.jvm" version "1.4.0"
+    id 'org.jetbrains.kotlin.multiplatform' version '1.4.0'
 }
 
-apply plugin: 'maven-publish'
+group 'com.github.fwilhe.inzell'
+version '0.1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
-ext.junitJupiterVersion  = '5.6.0'
+kotlin {
+    jvm()
+    js {
+        nodejs()
+        browser()
+    }
 
-dependencies {
-    implementation('org.jetbrains.kotlin:kotlin-stdlib:1.4.0')
-    testImplementation("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
-    testImplementation("org.junit.jupiter:junit-jupiter-params:${junitJupiterVersion}")
-}
+    sourceSets {
+        commonMain {
+            dependencies {
+                implementation kotlin('stdlib-common')
+                implementation("org.jetbrains.kotlinx:kotlinx-html-js:0.7.1")
 
-test {
-    useJUnitPlatform()
-}
 
-publishing {
-    repositories {
-        maven {
-            name = "Github"
-            url = uri("https://maven.pkg.github.com/fwilhe2/incell")
-            credentials {
-                username = 'fwilhe2'
-                password = System.getenv('GPR_AUTH_TOKEN')
             }
         }
-    }
-    publications {
-        maven(MavenPublication) {
-            groupId 'com.github.fwilhe2.incell'
-            artifactId 'incell'
-            version "0-${new Date().getTime()}-unreleased"
-
-            from components.java
+        commonTest {
+            dependencies {
+                implementation kotlin('test')
+                implementation kotlin('test-js')
+                implementation kotlin('test-common')
+                implementation kotlin('test-junit')
+                implementation kotlin('test-annotations-common')
+            }
         }
     }
 }
