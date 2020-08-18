@@ -22,8 +22,8 @@ jobs:
       - name: Assamble page
         run: |
           mkdir public
-          cp -r build/reports/tests/allTests/* public/allTests
-          cp -r build/distributions public/distributions
+          cp -r build/reports/tests/allTests public/
+          cp -r build/distributions public/
           cat > public/index.html <<EOL
           <!doctype html>
           <html>
