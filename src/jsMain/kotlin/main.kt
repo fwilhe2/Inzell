@@ -58,7 +58,7 @@ fun printHtml(s: Sheet) {
                 tr {
                     s.forEachFunction {
                         td {
-                            +(it.eval(row)).toString()
+                            +(it.eval(row)).toString().substring(0,5) //fixme more clever way to format
                         }
                     }
                 }

@@ -22,3 +22,10 @@ jobs:
         with:
           name: test-results
           path: build/reports/tests/allTests
+      - name: Deploy to GitHub Pages
+        uses: crazy-max/ghaction-github-pages@v2
+        with:
+          target_branch: gh-pages
+          build_dir: build/reports/tests/allTests
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
