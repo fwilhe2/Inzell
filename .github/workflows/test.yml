@@ -13,15 +13,38 @@ jobs:
           java-version: 14
           architecture: x64
       - run: ./gradlew -v
-      - run: ./gradlew check
+      - run: ./gradlew check jsBrowserDistribution
       - uses: actions/upload-artifact@v2
         with:
           name: test-results
           path: build/reports/tests/allTests
+
+      - name: Assamble page
+        run: |
+          mkdir public
+          cp -r build/reports/tests/allTests/* public/allTests
+          cp -r build/distributions public/distributions
+          cat > public/index.html <<EOL
+          <!doctype html>
+          <html>
+            <head>
+              <title>Inzell info page</title>
+            </head>
+            <body>
+              <p>
+                <a href="allTests">Test results</a>
+              </p>
+              <p>
+                <a href="distributions">Live demo</a>
+              </p>
+            </body>
+          </html>
+          EOL
+
       - name: Deploy to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v2
         with:
           target_branch: gh-pages
-          build_dir: build/reports/tests/allTests
+          build_dir:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
