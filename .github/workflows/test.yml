@@ -19,6 +19,9 @@ jobs:
           name: test-results
           path: build/reports/tests/allTests
 
+      - name: get timestamp
+        id: time
+        run: echo "::set-output name=action_fruit::`date -u +\"%Y-%m-%dT%H-%M-%S%Z\"`"
       - name: Assamble page
         run: |
           mkdir public
@@ -31,6 +34,10 @@ jobs:
               <title>Inzell info page</title>
             </head>
             <body>
+
+              <p>
+              Branch ${{ github.ref }}, time ${{ steps.time.outputs.action_fruit }}
+              </p>
               <p>
                 <a href="allTests">Test results</a>
               </p>
