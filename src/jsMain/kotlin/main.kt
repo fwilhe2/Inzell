@@ -1,5 +1,7 @@
 import com.github.fwilhe.inzell.Column
+import com.github.fwilhe.inzell.Sheet
 import com.github.fwilhe.inzell.powerOfTwo
+import com.github.fwilhe.inzell.spreadsheet
 import kotlinx.browser.*
 import kotlinx.html.*
 import kotlinx.html.dom.*
@@ -24,20 +26,37 @@ fun main() {
     fun calculateEfficiency(x: Int): Double = calculateSpeedup(x) / numberOfCpus.eval(x)
     val efficiency = Column("Efficiency", ::calculateEfficiency)
 
-    val functions = listOf(numberOfCpus, nX, nY, tA, numberOfOperations, tK, tP, tS, speedup, efficiency)
+    val sheet = spreadsheet {
+        caption("Performance model")
+        add(numberOfCpus)
+        add(nX)
+        add(nY)
+        add(tA)
+        add(numberOfOperations)
+        add(tK)
+        add(tP)
+        add(tS)
+        add(speedup)
+        add(efficiency)
+    }
 
+    printHtml(sheet)
+}
+
+fun printHtml(s: Sheet) {
     document.body!!.append.div {
+        h1 { +s.caption }
         table {
             tr {
-                repeat(10) { row ->
+                repeat(10) { rowIndex ->
                     th {
-                        +functions[row].title
+                        +s.title(rowIndex)
                     }
                 }
             }
-            repeat(10) {row ->
+            repeat(10) { row ->
                 tr {
-                    functions.forEach {
+                    s.forEachFunction {
                         td {
                             +(it.eval(row)).toString()
                         }
