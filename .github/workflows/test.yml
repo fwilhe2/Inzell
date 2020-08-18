@@ -5,16 +5,12 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-20.04
-    strategy:
-      matrix:
-        java: [ '8', '11', '14' ]
-    name: Java ${{ matrix.java }}
     steps:
       - uses: actions/checkout@v2
       - name: Setup java
         uses: joschi/setup-jdk@v2
         with:
-          java-version: ${{ matrix.java }}
+          java-version: 14
           architecture: x64
       - run: ./gradlew -v
       - run: ./gradlew check
