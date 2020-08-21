@@ -1,7 +1,4 @@
-import com.github.fwilhe.inzell.Column
-import com.github.fwilhe.inzell.CsvPrinter
-import com.github.fwilhe.inzell.powerOfTwo
-import com.github.fwilhe.inzell.spreadsheet
+import com.github.fwilhe.inzell.*
 
 fun main() {
     val numberOfCpus = Column("Number of CPUs", ::powerOfTwo)
@@ -37,8 +34,8 @@ fun main() {
         add(efficiency)
     }
 
-    sheet.printHtml()
 
     CsvPrinter(sheet).printToStandardOut()
+    HtmlPrinter(sheet).printToStandardOut()
 
 }
