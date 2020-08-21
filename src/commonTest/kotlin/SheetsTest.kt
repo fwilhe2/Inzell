@@ -22,6 +22,6 @@ class SheetsTest {
             column("Expenses", expenses)
             column("Share of Expense", ::shareOfExpense)
             column("Cost with (fictional) tax", ::expenseWithTaxes)
-        }.print(expenseList.size)
+        }
     }
 }
