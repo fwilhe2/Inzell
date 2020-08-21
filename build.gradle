@@ -26,9 +26,11 @@ kotlin {
             dependencies {
                 implementation kotlin('stdlib-common')
                 implementation("org.jetbrains.kotlinx:kotlinx-html-js:0.7.1")
+                implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.1")
                 implementation("org.jetbrains.kotlinx:kotlinx-browser:0.2")
             }
         }
+
         commonTest {
             dependencies {
                 implementation kotlin('test')

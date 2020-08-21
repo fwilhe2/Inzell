@@ -1,10 +1,6 @@
 import com.github.fwilhe.inzell.Column
-import com.github.fwilhe.inzell.Sheet
 import com.github.fwilhe.inzell.powerOfTwo
 import com.github.fwilhe.inzell.spreadsheet
-import kotlinx.browser.*
-import kotlinx.html.*
-import kotlinx.html.dom.*
 
 fun main() {
     val numberOfCpus = Column("Number of CPUs", ::powerOfTwo)
@@ -40,29 +36,5 @@ fun main() {
         add(efficiency)
     }
 
-    printHtml(sheet)
-}
-
-fun printHtml(s: Sheet) {
-    document.body!!.append.div {
-        table {
-            caption { +s.caption }
-            tr {
-                repeat(10) { rowIndex ->
-                    th {
-                        +s.title(rowIndex)
-                    }
-                }
-            }
-            repeat(10) { row ->
-                tr {
-                    s.forEachFunction {
-                        td {
-                            +(it.eval(row)).toString().substring(0,5) //fixme more clever way to format
-                        }
-                    }
-                }
-            }
-        }
-    }
+    sheet.printHtml()
 }

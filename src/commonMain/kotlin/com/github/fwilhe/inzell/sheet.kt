@@ -1,5 +1,8 @@
 package com.github.fwilhe.inzell
 
+import kotlinx.html.*
+import kotlinx.html.stream.createHTML
+
 typealias columnFunction = (Int) -> Double
 
 class Column(val title: String, private val function: columnFunction) {
@@ -12,6 +15,28 @@ class Sheet(private val columns: List<Column>, val caption: String = "(No captio
         repeat(numberOfRows) { row ->
             println(columns.map { column -> column.eval(row) }.joinToString(separator = ";"))
         }
+    }
+
+    fun printHtml(numberOfRows: Int = 10) {
+        println(createHTML().table {
+            caption { +caption }
+            tr {
+                repeat(10) { rowIndex ->
+                    th {
+                        +columns[rowIndex].title
+                    }
+                }
+            }
+            repeat(10) { row ->
+                tr {
+                    columns.forEach {
+                        td {
+                            +it.eval(row).toString()
+                        }
+                    }
+                }
+            }
+        })
     }
 
     fun row(index: Int): List<Double> = columns.map { it.eval(index) }
