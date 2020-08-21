@@ -1,13 +1,12 @@
-import com.github.fwilhe.inzell.Column
-import com.github.fwilhe.inzell.Sheet
-import com.github.fwilhe.inzell.powerOfTwo
-import com.github.fwilhe.inzell.spreadsheet
+import com.github.fwilhe.inzell.*
 import kotlinx.browser.*
 import kotlinx.html.*
 import kotlinx.html.dom.*
+import kotlinx.html.stream.createHTML
+import org.w3c.dom.Document
 
 fun main() {
-    val numberOfCpus = Column("Number of CPUs", ::powerOfTwo)
+    val numberOfCpus = Column("Number osfdf CPUs", ::powerOfTwo)
     val nX = Column("Problem Size X-Dimension") { 100.0 }
     val nY = Column("Problem Size Y-Dimension") { 100.0 }
     val tA = Column("Calculation Time per Cell") { 10.0 }
@@ -40,25 +39,26 @@ fun main() {
         add(efficiency)
     }
 
-    printHtml(sheet)
+    HtmlPrinter(sheet).browserPrint(document)
+
 }
 
-fun printHtml(s: Sheet) {
+fun HtmlPrinter.browserPrint(document: Document) {
     document.body!!.append.div {
         table {
-            caption { +s.caption }
+            caption { +sheet.caption }
             tr {
                 repeat(10) { rowIndex ->
                     th {
-                        +s.title(rowIndex)
+                        +sheet.columns[rowIndex].title
                     }
                 }
             }
             repeat(10) { row ->
                 tr {
-                    s.forEachFunction {
+                    sheet.columns.forEach {
                         td {
-                            +(it.eval(row)).toString().substring(0,5) //fixme more clever way to format
+                            +it.eval(row).toString()
                         }
                     }
                 }

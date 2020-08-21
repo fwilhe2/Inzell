@@ -9,41 +9,56 @@ class Column(val title: String, private val function: columnFunction) {
     fun eval(i: Int): Double = function.invoke(i)
 }
 
-class Sheet(private val columns: List<Column>, val caption: String = "(No caption provided)") {
-    fun print(numberOfRows: Int = 10) {
-        println(columns.joinToString(separator = ";") { column -> column.title })
-        repeat(numberOfRows) { row ->
-            println(columns.map { column -> column.eval(row) }.joinToString(separator = ";"))
+class Sheet(val columns: List<Column>, val caption: String = "(No caption provided)") {
+    fun row(index: Int): List<Double> = columns.map { it.eval(index) }
+    fun title(index: Int): String = columns[index].title
+    fun forEachFunction(function: (Column) -> Unit) {
+        columns.forEach {
+            function(it)
         }
     }
+}
 
-    fun printHtml(numberOfRows: Int = 10) {
-        println(createHTML().table {
-            caption { +caption }
+abstract class SpreadsheetPrinter(val sheet: Sheet, val numberOfRows: Int = 10) {
+    abstract override fun toString(): String
+    fun printToStandardOut() {
+        println(toString())
+    }
+}
+
+class CsvPrinter(sheet: Sheet) : SpreadsheetPrinter(sheet) {
+    override fun toString(): String {
+        val stringBuilder = StringBuilder()
+        stringBuilder.append(sheet.columns.joinToString(separator = ";") { column -> column.title }).append("\n")
+        repeat(numberOfRows) { row ->
+            stringBuilder.append(sheet.columns.map { column -> column.eval(row) }.joinToString(separator = ";"))
+                .append("\n")
+        }
+        return stringBuilder.toString()
+    }
+}
+
+class HtmlPrinter(sheet: Sheet) : SpreadsheetPrinter(sheet) {
+
+    override fun toString(): String {
+        return createHTML().table {
+            caption { +sheet.caption }
             tr {
                 repeat(10) { rowIndex ->
                     th {
-                        +columns[rowIndex].title
+                        +sheet.columns[rowIndex].title
                     }
                 }
             }
             repeat(10) { row ->
                 tr {
-                    columns.forEach {
+                    sheet.columns.forEach {
                         td {
                             +it.eval(row).toString()
                         }
                     }
                 }
             }
-        })
-    }
-
-    fun row(index: Int): List<Double> = columns.map { it.eval(index) }
-    fun title(index: Int): String = columns[index].title
-    fun forEachFunction(function: (Column) -> Unit) {
-        columns.forEach {
-            function(it)
         }
     }
 }

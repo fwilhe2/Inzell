@@ -1,4 +1,5 @@
 import com.github.fwilhe.inzell.Column
+import com.github.fwilhe.inzell.CsvPrinter
 import com.github.fwilhe.inzell.powerOfTwo
 import com.github.fwilhe.inzell.spreadsheet
 
@@ -37,4 +38,7 @@ fun main() {
     }
 
     sheet.printHtml()
+
+    CsvPrinter(sheet).printToStandardOut()
+
 }
