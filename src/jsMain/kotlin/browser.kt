@@ -2,9 +2,7 @@ import com.github.fwilhe.inzell.HtmlPrinter
 import kotlinx.html.*
 import kotlinx.html.dom.append
 import kotlinx.html.js.onClickFunction
-import kotlinx.html.stream.createHTML
 import org.w3c.dom.Document
-import org.w3c.dom.asList
 
 fun HtmlPrinter.browserPrint(document: Document, rowCount: Int = 10) {
     document.body!!.append.div {
