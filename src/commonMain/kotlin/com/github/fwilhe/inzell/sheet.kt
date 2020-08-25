@@ -84,10 +84,6 @@ fun spreadsheet(builder: Spreadsheet.() -> Unit): Sheet {
     return Sheet(columns, theCaption)
 }
 
-fun javaSpreadsheetBuilder(columns: List<Column>, theCaption: String = "(No caption provided)"): Sheet {
-    return Sheet(columns, theCaption)
-}
-
 interface Spreadsheet {
     fun caption(caption: String)
     fun column(title: String, function: columnFunction)
