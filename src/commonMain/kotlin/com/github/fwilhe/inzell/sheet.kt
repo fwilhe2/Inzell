@@ -44,9 +44,9 @@ class HtmlPrinter(sheet: Sheet) : SpreadsheetPrinter(sheet) {
         return createHTML().table {
             caption { +sheet.caption }
             tr {
-                repeat(10) { rowIndex ->
+                repeat(sheet.columns.size) { colIndex ->
                     th {
-                        +sheet.columns[rowIndex].title
+                        +sheet.columns[colIndex].title
                     }
                 }
             }
@@ -81,6 +81,10 @@ fun spreadsheet(builder: Spreadsheet.() -> Unit): Sheet {
 
     }.builder()
 
+    return Sheet(columns, theCaption)
+}
+
+fun javaSpreadsheetBuilder(columns: List<Column>, theCaption: String = "(No caption provided)"): Sheet {
     return Sheet(columns, theCaption)
 }
 
