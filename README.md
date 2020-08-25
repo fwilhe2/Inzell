@@ -1,6 +1,13 @@
-# Incell
+# Inzell
 
 This project is meant to explore the kotlin programming language, learn about functional programming and implement a tiny spreadsheet-software.
+
+## Name
+
+The name is intended to be a pun on a popular spreadsheet software.
+Also, [Inzell](https://en.wikipedia.org/wiki/Inzell) is a city in Bavaria.
+
+## Concepts
 
 The basic idea is that every column in a spreadsheet is usually some function.
 It may be a constant function, if only one value is needed.
@@ -24,8 +31,6 @@ Column("Number of CPUs", ::powerOfTwo)
 
 The design goal is to hide all implementation-code from the user and allow to create easily programs to compute some data.
 The default behavior is to write the CSV-data to stdout, which allows to put the tool in a unix pipe, for example to use tools such as `csv2md`.
-
-For complete examples, please refer to the [example project](https://github.com/fwilhe/Incell-Examples).
 
 ## Building
 

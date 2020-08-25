@@ -1,45 +1,50 @@
 plugins {
-    id 'application'
-    id "org.jetbrains.kotlin.jvm" version "1.4.0"
+    id 'org.jetbrains.kotlin.multiplatform' version '1.4.0'
+    id 'maven-publish'
 }
 
-apply plugin: 'maven-publish'
+group 'com.github.fwilhe.inzell'
+version '0.1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    jcenter()
+    maven {
+        url "https://kotlin.bintray.com/kotlinx"
+    }
 }
 
-ext.junitJupiterVersion  = '5.6.0'
+kotlin {
+    jvm()
+    js {
+        nodejs()
+        browser()
+        binaries.executable()
+    }
 
-dependencies {
-    implementation('org.jetbrains.kotlin:kotlin-stdlib:1.4.0')
-    testImplementation("org.junit.jupiter:junit-jupiter-api:${junitJupiterVersion}")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitJupiterVersion}")
-    testImplementation("org.junit.jupiter:junit-jupiter-params:${junitJupiterVersion}")
-}
-
-test {
-    useJUnitPlatform()
-}
-
-publishing {
-    repositories {
-        maven {
-            name = "Github"
-            url = uri("https://maven.pkg.github.com/fwilhe2/incell")
-            credentials {
-                username = 'fwilhe2'
-                password = System.getenv('GPR_AUTH_TOKEN')
+    sourceSets {
+        commonMain {
+            dependencies {
+                implementation kotlin('stdlib-common')
+                implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.1")
             }
         }
-    }
-    publications {
-        maven(MavenPublication) {
-            groupId 'com.github.fwilhe2.incell'
-            artifactId 'incell'
-            version "0-${new Date().getTime()}-unreleased"
 
-            from components.java
+        jsMain {
+            dependencies {
+                implementation("org.jetbrains.kotlinx:kotlinx-browser:0.2")
+                implementation("org.jetbrains.kotlinx:kotlinx-html-js:0.7.1")
+            }
+        }
+
+        commonTest {
+            dependencies {
+                implementation kotlin('test')
+                implementation kotlin('test-js')
+                implementation kotlin('test-common')
+                implementation kotlin('test-junit')
+                implementation kotlin('test-annotations-common')
+            }
         }
     }
 }
