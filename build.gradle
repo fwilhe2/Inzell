@@ -26,11 +26,6 @@ kotlin {
         commonMain {
             dependencies {
                 implementation kotlin('stdlib-common')
-            }
-        }
-
-        jvmMain {
-            dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.1")
             }
         }

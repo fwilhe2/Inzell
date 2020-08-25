@@ -13,7 +13,7 @@ jobs:
           java-version: 14
           architecture: x64
       - run: ./gradlew -v
-      - run: ./gradlew jvmTest jsBrowserTest jsBrowserDistribution
+      - run: ./gradlew jvmTest jsBrowserTest jsBrowserDistribution publishToMavenLocal
       - uses: actions/upload-artifact@v2
         with:
           name: test-results
