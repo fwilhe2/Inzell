@@ -1,9 +1,9 @@
 package com.github.fwilhe.inzell
 
-
 class SpreadsheetBuilder() {
-    val columns: MutableList<Column> = mutableListOf()
-    var theCaption: String = "(No caption provided)"
+    private val columns: MutableList<Column> = mutableListOf()
+    private var theCaption: String = "(No caption provided)"
+
     fun addColumn(column: Column): SpreadsheetBuilder {
         columns.add(column)
         return this
@@ -15,9 +15,4 @@ class SpreadsheetBuilder() {
     }
 
     fun build(): Sheet = Sheet(columns, theCaption)
-}
-
-
-fun javaSpreadsheetBuilder(columns: List<Column>, theCaption: String = "(No caption provided)"): Sheet {
-    return Sheet(columns, theCaption)
 }

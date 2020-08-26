@@ -39,7 +39,6 @@ class CsvPrinter(sheet: Sheet) : SpreadsheetPrinter(sheet) {
 }
 
 class HtmlPrinter(sheet: Sheet) : SpreadsheetPrinter(sheet) {
-
     override fun toString(): String {
         return createHTML().table {
             caption { +sheet.caption }
