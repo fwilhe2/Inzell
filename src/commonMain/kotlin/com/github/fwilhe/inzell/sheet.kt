@@ -1,8 +1,5 @@
 package com.github.fwilhe.inzell
 
-import kotlinx.html.*
-import kotlinx.html.stream.createHTML
-
 typealias columnFunction = (Int) -> Double
 
 class Column(val title: String, private val function: columnFunction) {
@@ -38,29 +35,29 @@ class CsvPrinter(sheet: Sheet) : SpreadsheetPrinter(sheet) {
     }
 }
 
-class HtmlPrinter(sheet: Sheet) : SpreadsheetPrinter(sheet) {
-    override fun toString(): String {
-        return createHTML().table {
-            caption { +sheet.caption }
-            tr {
-                repeat(sheet.columns.size) { colIndex ->
-                    th {
-                        +sheet.columns[colIndex].title
-                    }
-                }
-            }
-            repeat(10) { row ->
-                tr {
-                    sheet.columns.forEach {
-                        td {
-                            +it.eval(row).toString()
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
+//class HtmlPrinter(sheet: Sheet) : SpreadsheetPrinter(sheet) {
+//    override fun toString(): String {
+//        return createHTML().table {
+//            caption { +sheet.caption }
+//            tr {
+//                repeat(sheet.columns.size) { colIndex ->
+//                    th {
+//                        +sheet.columns[colIndex].title
+//                    }
+//                }
+//            }
+//            repeat(10) { row ->
+//                tr {
+//                    sheet.columns.forEach {
+//                        td {
+//                            +it.eval(row).toString()
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
+//}
 
 fun spreadsheet(builder: Spreadsheet.() -> Unit): Sheet {
     val columns = mutableListOf<Column>()
