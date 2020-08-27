@@ -1,11 +1,15 @@
 package com.github.fwilhe.inzell
 
+import kotlin.js.JsExport
+
 typealias columnFunction = (Int) -> Double
 
+@JsExport
 class Column(val title: String, private val function: columnFunction) {
     fun eval(i: Int): Double = function.invoke(i)
 }
 
+@JsExport
 class Sheet(val columns: List<Column>, val caption: String = "(No caption provided)") {
     fun row(index: Int): List<Double> = columns.map { it.eval(index) }
     fun title(index: Int): String = columns[index].title
@@ -23,6 +27,7 @@ abstract class SpreadsheetPrinter(val sheet: Sheet, val numberOfRows: Int = 10) 
     }
 }
 
+@JsExport
 class CsvPrinter(sheet: Sheet) : SpreadsheetPrinter(sheet) {
     override fun toString(): String {
         val stringBuilder = StringBuilder()
