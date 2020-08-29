@@ -20,7 +20,7 @@ class SheetsTest {
         val tA = Column("Calculation Time per Cell") { 10 }
         val numberOfOperations = Column("Number of Operations") { 1 }
         val tK = Column("Communication Time per Cell") { 200 }
-        fun timeParallel(x: Int): Int = (nX.evalInt(x) / numberOfCpus.evalInt(x) as Int) * // Slice for each CPU
+        fun timeParallel(x: Int): Int = (nX.evalInt(x) / numberOfCpus.evalInt(x)) * // Slice for each CPU
                 nY.evalInt(x) * // Whole Y-Dimension of the problem
                 tA.evalInt(x) * numberOfOperations.evalInt(x) + // Time to calculate each cell
                 tK.evalInt(x) * numberOfCpus.evalInt(x) // Communication increases with number of CPUs
