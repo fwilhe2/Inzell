@@ -48,29 +48,27 @@ class MarkdownPrinter(sheet: Sheet) : SpreadsheetPrinter(sheet) {
     }
 }
 
-//class HtmlPrinter(sheet: Sheet) : SpreadsheetPrinter(sheet) {
-//    override fun toString(): String {
-//        return createHTML().table {
-//            caption { +sheet.caption }
-//            tr {
-//                repeat(sheet.columns.size) { colIndex ->
-//                    th {
-//                        +sheet.columns[colIndex].title
-//                    }
-//                }
-//            }
-//            repeat(10) { row ->
-//                tr {
-//                    sheet.columns.forEach {
-//                        td {
-//                            +it.eval(row).toString()
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
-//}
+class HtmlPrinter(sheet: Sheet) : SpreadsheetPrinter(sheet) {
+    override fun toString(): String {
+        val stringBuilder = StringBuilder()
+        stringBuilder.appendLine("<table>")
+        stringBuilder.appendLine("  <caption>${sheet.caption}</caption>")
+        stringBuilder.appendLine("  <tr>")
+        repeat(sheet.columns.size) { colIndex ->
+            stringBuilder.appendLine("    <th>${sheet.columns[colIndex].title}</th>")
+        }
+        stringBuilder.appendLine("  </tr>")
+        repeat(10) { row ->
+            stringBuilder.appendLine("  <tr>")
+            sheet.columns.forEach {
+                stringBuilder.appendLine("    <td>${it.eval(row)}</td>")
+            }
+            stringBuilder.appendLine("  </tr>")
+        }
+        stringBuilder.appendLine("</table>")
+        return stringBuilder.toString()
+    }
+}
 
 fun spreadsheet(builder: Spreadsheet.() -> Unit): Sheet {
     val columns = mutableListOf<Column>()
