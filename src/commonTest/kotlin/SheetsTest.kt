@@ -26,7 +26,7 @@ class SheetsTest {
     }
 
     @Test
-    fun printMarkdownTable() {
+    fun printTables() {
         val numberOfCpus = Column("Number of CPUs", ::powerOfTwo)
         val nX = Column("Problem Size X-Dimension") { 100.0 }
         val nY = Column("Problem Size Y-Dimension") { 100.0 }
@@ -59,8 +59,8 @@ class SheetsTest {
             add(speedup)
             add(efficiency)
         }
-
-
+        CsvPrinter(sheet).printToStandardOut()
         MarkdownPrinter(sheet).printToStandardOut()
+        HtmlPrinter(sheet).printToStandardOut()
     }
 }
