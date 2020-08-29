@@ -25,6 +25,7 @@ kotlin {
         commonMain {
             dependencies {
                 implementation kotlin('stdlib-common')
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.1.0")
             }
         }
 

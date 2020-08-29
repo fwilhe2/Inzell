@@ -1,5 +1,8 @@
+@file:JvmName("StandardLibrary")
+
 package com.github.fwilhe.inzell
 
+import kotlin.jvm.JvmName
 import kotlin.math.pow
 import kotlin.random.*
 

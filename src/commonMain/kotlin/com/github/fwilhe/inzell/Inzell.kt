@@ -1,13 +1,19 @@
 package com.github.fwilhe.inzell
 
-typealias columnFunction = (Int) -> Double
+import kotlinx.datetime.Instant
+
+typealias columnFunction = (Int) -> Any
 
 class Column(val title: String, private val function: columnFunction) {
-    fun eval(i: Int): Double = function.invoke(i)
+    fun eval(i: Int): Any = function.invoke(i)
+    fun evalInt(i: Int): Int = function.invoke(i) as Int
+    fun evalDouble(i: Int): Double = function.invoke(i) as Double
+    fun evalDate(i: Int): Instant = function.invoke(i) as Instant
+    fun evalString(i: Int): String = function.invoke(i) as String
 }
 
 class Sheet(val columns: List<Column>, val caption: String = "(No caption provided)") {
-    fun row(index: Int): List<Double> = columns.map { it.eval(index) }
+    fun row(index: Int): List<Any> = columns.map { it.eval(index) }
     fun title(index: Int): String = columns[index].title
     fun forEachFunction(function: (Column) -> Unit) {
         columns.forEach {
@@ -27,9 +33,9 @@ class CsvPrinter(sheet: Sheet) : SpreadsheetPrinter(sheet) {
     override fun toString(): String {
         val stringBuilder = StringBuilder()
         stringBuilder.append(sheet.columns.joinToString(separator = ";") { column -> column.title }).append("\n")
-        repeat(numberOfRows) { row ->
+        for (row in 1..numberOfRows){
             stringBuilder.append(sheet.columns.map { column -> column.eval(row) }.joinToString(separator = ";"))
-                    .append("\n")
+                .append("\n")
         }
         return stringBuilder.toString()
     }
@@ -39,10 +45,12 @@ class MarkdownPrinter(sheet: Sheet) : SpreadsheetPrinter(sheet) {
     override fun toString(): String {
         val stringBuilder = StringBuilder()
         stringBuilder.append(sheet.columns.joinToString(separator = " | ") { column -> column.title }).append("\n")
-        stringBuilder.append(sheet.columns.joinToString(separator = " | ") { column -> "-".repeat(column.title.length) }).append("\n")
-        repeat(numberOfRows) { row ->
-            stringBuilder.append(sheet.columns.map { column -> column.eval(row).toString().padEnd(column.title.length) }.joinToString(separator = " | "))
-                    .append("\n")
+        stringBuilder.append(sheet.columns.joinToString(separator = " | ") { column -> "-".repeat(column.title.length) })
+            .append("\n")
+        for (row in 1..numberOfRows){
+            stringBuilder.append(sheet.columns.map { column -> column.eval(row).toString().padEnd(column.title.length) }
+                .joinToString(separator = " | "))
+                .append("\n")
         }
         return stringBuilder.toString()
     }
@@ -58,7 +66,7 @@ class HtmlPrinter(sheet: Sheet) : SpreadsheetPrinter(sheet) {
             stringBuilder.appendLine("    <th>${sheet.columns[colIndex].title}</th>")
         }
         stringBuilder.appendLine("  </tr>")
-        repeat(10) { row ->
+        for (row in 1..numberOfRows){
             stringBuilder.appendLine("  <tr>")
             sheet.columns.forEach {
                 stringBuilder.appendLine("    <td>${it.eval(row)}</td>")
@@ -98,10 +106,10 @@ interface Spreadsheet {
 }
 
 //todo handle case when i >= values.size()
-fun buildFunctionOf(values: Array<Double>): columnFunction = { i: Int ->
+fun buildFunctionOf(values: Array<Any>): columnFunction = { i: Int ->
     values[i]
 }
 
-fun buildFunctionOf(values: Collection<Double>): columnFunction = { i: Int ->
+fun buildFunctionOf(values: Collection<Any>): columnFunction = { i: Int ->
     values.elementAt(i)
 }
