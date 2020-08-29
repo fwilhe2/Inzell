@@ -1,10 +1,15 @@
 package com.github.fwilhe.inzell
 
+import kotlinx.datetime.Instant
 
 typealias columnFunction = (Int) -> Any
 
 class Column(val title: String, private val function: columnFunction) {
     fun eval(i: Int): Any = function.invoke(i)
+    fun evalInt(i: Int): Int = function.invoke(i) as Int
+    fun evalDouble(i: Int): Double = function.invoke(i) as Double
+    fun evalDate(i: Int): Instant = function.invoke(i) as Instant
+    fun evalString(i: Int): String = function.invoke(i) as String
 }
 
 class Sheet(val columns: List<Column>, val caption: String = "(No caption provided)") {

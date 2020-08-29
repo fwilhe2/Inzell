@@ -11,26 +11,37 @@ Also, [Inzell](https://en.wikipedia.org/wiki/Inzell) is a city in Bavaria.
 
 The basic idea is that every column in a spreadsheet is usually some function.
 It may be a constant function, if only one value is needed.
-Input for the function is the column-number.
+Input for the function is the row index.
 This allows to make a function that does anything with that value, counting for example.
 
-The function must return a Double value, hence it's signature must look like
+The function may return values of any type:
 
-```
-fun f(n: Int): Double
+```kotlin
+fun f(n: Int): Any
 ```
 
 Some of such functions are provided by `StandardLibrary.kt`.
 
-Ech `Column` has a title that is used as a header, and a function to compute its value.
-An example is
+Ech `Column` has a title which is used as a header, and a function to compute its value.
+An example is:
 
-```
+```kotlin
 Column("Number of CPUs", ::powerOfTwo)
 ```
 
-The design goal is to hide all implementation-code from the user and allow to create easily programs to compute some data.
-The default behavior is to write the CSV-data to stdout, which allows to put the tool in a unix pipe, for example to use tools such as `csv2md`.
+Finally, a `spreadsheet` is built like so:
+
+```kotlin
+spreadsheet {
+    column("Expenses", expenses)
+    column("Share of Expense", ::shareOfExpense)
+    column("Cost with (fictional) tax", ::expenseWithTaxes)
+}
+```
+
+### More Examples
+
+See [Inzell-Examples](https://github.com/fwilhe2/Inzell-Examples/) for more examples, also ones not in Kotlin.
 
 ## Building
 
