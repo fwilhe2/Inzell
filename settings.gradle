@@ -1,2 +1,15 @@
 rootProject.name = 'Inzell'
 
+plugins {
+    id "com.gradle.enterprise" version "3.4.1"
+}
+
+// cf https://docs.gradle.com/enterprise/gradle-plugin/
+gradleEnterprise {
+    buildScan {
+        termsOfServiceUrl = "https://gradle.com/terms-of-service"
+        termsOfServiceAgree = "yes"
+        publishAlwaysIf(System.getenv("CI"))
+    }
+}
+
