@@ -29,7 +29,20 @@ class CsvPrinter(sheet: Sheet) : SpreadsheetPrinter(sheet) {
         stringBuilder.append(sheet.columns.joinToString(separator = ";") { column -> column.title }).append("\n")
         repeat(numberOfRows) { row ->
             stringBuilder.append(sheet.columns.map { column -> column.eval(row) }.joinToString(separator = ";"))
-                .append("\n")
+                    .append("\n")
+        }
+        return stringBuilder.toString()
+    }
+}
+
+class MarkdownPrinter(sheet: Sheet) : SpreadsheetPrinter(sheet) {
+    override fun toString(): String {
+        val stringBuilder = StringBuilder()
+        stringBuilder.append(sheet.columns.joinToString(separator = " | ") { column -> column.title }).append("\n")
+        stringBuilder.append(sheet.columns.joinToString(separator = " | ") { column -> "-".repeat(column.title.length) }).append("\n")
+        repeat(numberOfRows) { row ->
+            stringBuilder.append(sheet.columns.map { column -> column.eval(row).toString().padEnd(column.title.length) }.joinToString(separator = " | "))
+                    .append("\n")
         }
         return stringBuilder.toString()
     }
