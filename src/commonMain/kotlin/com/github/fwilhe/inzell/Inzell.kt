@@ -1,9 +1,13 @@
 package com.github.fwilhe.inzell
 
 import kotlinx.datetime.Instant
+import kotlin.js.ExperimentalJsExport
+import kotlin.js.JsExport
 
 typealias columnFunction = (Int) -> Any
 
+@ExperimentalJsExport
+@JsExport
 class Column(val title: String, private val function: columnFunction) {
     fun eval(i: Int): Any = function.invoke(i)
     fun evalInt(i: Int): Int = function.invoke(i) as Int
@@ -12,6 +16,8 @@ class Column(val title: String, private val function: columnFunction) {
     fun evalString(i: Int): String = function.invoke(i) as String
 }
 
+@ExperimentalJsExport
+@JsExport
 class Sheet(val columns: List<Column>, val caption: String = "(No caption provided)") {
     fun row(index: Int): List<Any> = columns.map { it.eval(index) }
     fun title(index: Int): String = columns[index].title
