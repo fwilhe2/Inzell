@@ -4,7 +4,5 @@ updates:
     directory: '/'
     assignees:
       - "fwilhe2"
-    # Check the npm registry for updates every day (weekdays)
     schedule:
-      interval: 'daily'
-      time: "18:00"
+      interval: 'weekly'
