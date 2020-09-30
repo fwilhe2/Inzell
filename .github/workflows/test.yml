@@ -10,7 +10,7 @@ jobs:
       - name: Setup java
         uses: joschi/setup-jdk@v2
         with:
-          java-version: 14
+          java-version: 15
           architecture: x64
       - run: ./gradlew -v
       - uses: fwilhe2/gradle-build-action@master
