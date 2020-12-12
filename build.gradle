@@ -1,5 +1,5 @@
 plugins {
-    id 'org.jetbrains.kotlin.multiplatform' version '1.4.20'
+    id 'org.jetbrains.kotlin.multiplatform' version '1.4.21'
     id 'maven-publish'
 }
 
@@ -40,7 +40,7 @@ kotlin {
                 implementation kotlin('test')
                 implementation kotlin('test-js')
                 implementation kotlin('test-common')
-                implementation kotlin('test-junit')
+                implementation kotlin('test-junit5')
                 implementation kotlin('test-annotations-common')
             }
         }
