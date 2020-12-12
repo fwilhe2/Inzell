@@ -40,7 +40,7 @@ kotlin {
                 implementation kotlin('test')
                 implementation kotlin('test-js')
                 implementation kotlin('test-common')
-                implementation kotlin('test-junit')
+                implementation kotlin('test-junit5')
                 implementation kotlin('test-annotations-common')
             }
         }
