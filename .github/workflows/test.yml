@@ -28,8 +28,9 @@ jobs:
               val timestamp = java.time.Instant.now()
 
               shell {
+                export("TIMESTAMP" to timestamp)
                 "./gradlew check"()
                 "ls -la"()
-                "echo ${timestamp}"
+                "echo TIMESTAMP: ${TIMESTAMP}"
               }
 
