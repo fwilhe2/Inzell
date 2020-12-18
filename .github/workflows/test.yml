@@ -25,11 +25,11 @@ jobs:
 
               import eu.jrie.jetbrains.kotlinshell.shell.*
 
-              val timestamp = Instant.now()
+              val timestamp = java.time.Instant.now()
 
               shell {
                 "./gradlew check"()
-                File("public/testresults/${timestamp}").mkdirs()
+                java.io.File("public/testresults/${timestamp}").mkdirs()
                 "cp -r build/reports/tests/allTests/* public/testresults/${timestamp}"()
                 "curl https://raw.githubusercontent.com/${timestamp}/gh-pages/index.html > public/index.html.old"()
                 """cat > public/index.html.new <<EOL
