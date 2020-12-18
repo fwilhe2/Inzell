@@ -29,15 +29,7 @@ jobs:
 
               shell {
                 "./gradlew check"()
-                "mkdir -p public/testresults/${timestamp}"()
-                "cp -r build/reports/tests/allTests/* public/testresults/${timestamp}"()
-                "curl https://raw.githubusercontent.com/${timestamp}/gh-pages/index.html > public/index.html.old"()
-                """cat > public/index.html.new <<EOL
-                    <p>
-                      <a href="testresults/${timestamp}">Test results for branch ${{ github.ref }} from ${timestamp}</a>
-                    </p>
-                EOL"""()
-                "cat public/index.html* > public/index.html"()
-                "rm public/index.html.*"()
+                "ls -la"()
+                "echo ${timestamp)"
               }
 
