@@ -12,7 +12,8 @@ jobs:
         with:
           java-version: 15
           architecture: x64
-      - uses: fwilhe2/setup-kotlin@main
+      - name: Build
+        uses: fwilhe2/setup-kotlin@main
         with:
           script: |
               #!/usr/bin/env kotlin
@@ -24,7 +25,19 @@ jobs:
 
               import eu.jrie.jetbrains.kotlinshell.shell.*
 
+              val timestamp = Instant.now()
+
               shell {
                 "./gradlew check"()
+                File("public/testresults/${timestamp}").mkdirs()
+                "cp -r build/reports/tests/allTests/* public/testresults/${timestamp}"()
+                "curl https://raw.githubusercontent.com/${timestamp}/gh-pages/index.html > public/index.html.old"()
+                """cat > public/index.html.new <<EOL
+                    <p>
+                      <a href="testresults/${timestamp}">Test results for branch ${{ github.ref }} from ${timestamp}</a>
+                    </p>
+                EOL"""()
+                "cat public/index.html* > public/index.html"()
+                "rm public/index.html.*"()
               }
 
