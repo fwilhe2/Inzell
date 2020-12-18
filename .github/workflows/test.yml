@@ -30,6 +30,6 @@ jobs:
               shell {
                 "./gradlew check"()
                 "ls -la"()
-                "echo ${timestamp)"
+                "echo ${timestamp}"
               }
 
