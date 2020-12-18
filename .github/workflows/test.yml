@@ -36,7 +36,7 @@ jobs:
 
                 "mkdir -p public/testresults/${env("TIMESTAMP")}"()
                 "find build/reports/tests"()
-                "cp -r build/reports/tests/allTests/* public/testresults/${env("TIMESTAMP")}"()
+                "cp -r build/reports/tests/allTests public/testresults/${env("TIMESTAMP")}"()
                 "curl https://raw.githubusercontent.com/fwilhe2/Inzell/gh-pages/index.html > public/index.html.old"()
                 """cat > public/index.html.new <<EOL
                     <p>
