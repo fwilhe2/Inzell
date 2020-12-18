@@ -31,6 +31,6 @@ jobs:
                 readonly export("TIMESTAMP" to timestamp.toString())
                 "./gradlew check"()
                 "ls -la"()
-                "echo TIMESTAMP: ${TIMESTAMP}"
+                "echo TIMESTAMP: ${env("TIMESTAMP")}"
               }
 
