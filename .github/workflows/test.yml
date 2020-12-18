@@ -29,7 +29,7 @@ jobs:
 
               shell {
                 "./gradlew check"()
-                java.io.File("public/testresults/${timestamp}").mkdirs()
+                "mkdir -p public/testresults/${timestamp}"()
                 "cp -r build/reports/tests/allTests/* public/testresults/${timestamp}"()
                 "curl https://raw.githubusercontent.com/${timestamp}/gh-pages/index.html > public/index.html.old"()
                 """cat > public/index.html.new <<EOL
