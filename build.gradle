@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.github.fwilhe.inzell'
-version '0.0.2.norelease'
+version System.getenv("VERSION") ?: '0.0.3.norelease'
 
 repositories {
     mavenCentral()
