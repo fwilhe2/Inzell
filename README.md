@@ -1,5 +1,9 @@
 # Inzell
 
+![CI](https://github.com/fwilhe2/Inzell/workflows/CI/badge.svg)
+![Latest Release](https://img.shields.io/github/v/tag/fwilhe2/Inzell?label=Latest%20Release)
+![License](https://img.shields.io/github/license/fwilhe2/Inzell)
+
 This project is meant to explore the kotlin programming language, learn about functional programming and implement a tiny spreadsheet-software.
 
 ## Name
