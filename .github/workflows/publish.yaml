@@ -23,7 +23,7 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
       - name: Publish to GitHub Packages
-        run: ./gradlew publishJvmPublicationToGitHubPackagesRepository
+        run: ./gradlew publishAllPublicationsToGitHubPackagesRepository
         env:
           USERNAME: fwilhe2
           TOKEN: ${{ secrets.GPR_AUTH_TOKEN }}
