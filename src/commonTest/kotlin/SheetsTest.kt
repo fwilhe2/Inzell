@@ -14,6 +14,18 @@ class SheetsTest {
     }
 
     @Test
+    fun booleanValues() {
+        val sheet = spreadsheet {
+            column("i") { x -> count(x) }
+            column("is even") { x -> isEven(x) }
+            column("even and prime") { x -> isEven(x).and(isPrime(x)) }
+        }
+
+        MarkdownPrinter(sheet).printToStandardOut()
+
+    }
+
+    @Test
     fun printTables() {
         val numberOfCpus = Column("Number of CPUs") { x -> x * x }
         val nX = Column("Problem Size X-Dimension") { 100 }
