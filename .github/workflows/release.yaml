@@ -18,8 +18,7 @@ jobs:
       - name: Get Version Number
         id: next_version
         run: |
-          npm install semver --quiet
-          echo "::set-output name=version_number::$(node_modules/.bin/semver --increment patch $(curl --silent "https://api.github.com/repos/$GITHUB_REPOSITORY/releases/latest" | jq -r .tag_name))"
+          echo "::set-output name=version_number::$(npx semver --increment patch $(curl --silent "https://api.github.com/repos/$GITHUB_REPOSITORY/releases/latest" | jq -r .tag_name))"
       - run: echo ${{ steps.next_version.outputs.version_number }}
 
       - name: Create Release
@@ -31,7 +30,7 @@ jobs:
           tag_name: ${{ steps.next_version.outputs.version_number }}
 
       - name: Publish to GitHub Packages
-        run: ./gradlew publishJvmPublicationToGitHubPackagesRepository
+        run: ./gradlew publishAllPublicationsToGitHubPackagesRepository
         env:
           USERNAME: fwilhe2
           TOKEN: ${{ secrets.GPR_AUTH_TOKEN }}
