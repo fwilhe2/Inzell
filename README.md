@@ -43,6 +43,23 @@ spreadsheet {
 
 See [Inzell-Examples](https://github.com/fwilhe2/Inzell-Examples/) for more examples, also ones not in Kotlin.
 
+## Using the library
+
+The maven artifacts are published to GitHub.
+Use the following coordinates for a jvm application:
+
+```
+<dependency>
+  <groupId>com.github.fwilhe.inzell</groupId>
+  <artifactId>inzell-jvm</artifactId>
+  <version>LATEST_VERSION_HERE</version>
+</dependency>
+```
+
+Be sure to configure the GitHub repo in maven.
+
+The library depends on the Kotlin standard library.
+
 ## Building
 
 To install the library to your local Maven repo, type `./gradlew publishToMavenLocal` in the project root.
