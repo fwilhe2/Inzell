@@ -1,4 +1,14 @@
-(function (_, Kotlin) {
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd)
+    define(['exports', 'kotlin'], factory);
+  else if (typeof exports === 'object')
+    factory(module.exports, require('kotlin'));
+  else {
+    if (typeof kotlin === 'undefined') {
+      throw new Error("Error loading module 'inzell-jsLegacy'. Its dependency 'kotlin' was not found. Please, check whether 'kotlin' is loaded prior to 'inzell-jsLegacy'.");
+    }root['inzell-jsLegacy'] = factory(typeof this['inzell-jsLegacy'] === 'undefined' ? {} : this['inzell-jsLegacy'], kotlin);
+  }
+}(this, function (_, Kotlin) {
   'use strict';
   var throwCCE = Kotlin.throwCCE;
   var Kind_CLASS = Kotlin.Kind.CLASS;
@@ -303,6 +313,6 @@
   package$inzell.random_za3lpa$ = random;
   Kotlin.defineModule('inzell-jsLegacy', _);
   return _;
-}(module.exports, require('kotlin')));
+}));
 
 //# sourceMappingURL=inzell-jsLegacy.js.map
