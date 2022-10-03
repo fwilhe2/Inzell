@@ -1,0 +1,10 @@
+{
+  "name": "inzell-js-legacy",
+  "version": "0.0.3-norelease",
+  "main": "kotlin/inzell-js-legacy.js",
+  "devDependencies": {},
+  "dependencies": {},
+  "peerDependencies": {},
+  "optionalDependencies": {},
+  "bundledDependencies": []
+}
