@@ -6,8 +6,7 @@
   "dependencies": {
     "kotlin-test-js-runner": "file:/home/runner/work/Inzell/Inzell/build/js/packages_imported/kotlin-test-js-runner/1.4.32",
     "kotlin-test": "file:/home/runner/work/Inzell/Inzell/build/js/packages_imported/kotlin-test/1.4.32",
-    "kotlin": "file:/home/runner/work/Inzell/Inzell/build/js/packages_imported/kotlin/1.4.32",
-    "empty": "file:/home/runner/work/Inzell/Inzell/build/js/packages_imported/empty/0.2.0"
+    "kotlin": "file:/home/runner/work/Inzell/Inzell/build/js/packages_imported/kotlin/1.4.32"
   },
   "peerDependencies": {},
   "optionalDependencies": {},
