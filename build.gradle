@@ -9,9 +9,6 @@ version System.getenv("VERSION") ?: '0.0.3.norelease'
 repositories {
     mavenCentral()
     jcenter()
-    maven {
-        url "https://kotlin.bintray.com/kotlinx"
-    }
 }
 
 kotlin {
@@ -30,7 +27,7 @@ kotlin {
 
         jsMain {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-browser:0.2")
+                // implementation("org.jetbrains.kotlinx:kotlinx-browser:0.2")
             }
         }
 
