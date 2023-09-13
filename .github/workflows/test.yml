@@ -16,12 +16,14 @@ jobs:
       - run: ./gradlew -v
       - uses: fwilhe2/gradle-build-action@master
       - run: ./gradlew publishToMavenLocal
-      - run: cp -r build/js/packages/inzell-js-legacy public
-      - name: Deploy to GitHub Pages
-        uses: crazy-max/ghaction-github-pages@v2
-        with:
-          target_branch: gh-pages
-          build_dir: public
-          keep_history: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - run: find build/js/packages
+      # - run: cp -r build/js/packages/inzell-js-legacy public
+      # - name: Deploy to GitHub Pages
+      #   uses: crazy-max/ghaction-github-pages@v2
+      #   with:
+      #     target_branch: gh-pages
+      #     build_dir: public
+      #     keep_history: true
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
