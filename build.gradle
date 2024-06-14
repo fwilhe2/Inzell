@@ -16,6 +16,7 @@ kotlin {
     js(IR) {
         nodejs()
         browser()
+        useCommonJs()
     }
 
     sourceSets {
