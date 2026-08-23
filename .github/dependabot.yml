@@ -1,5 +1,11 @@
 version: 2
 updates:
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    assignees:
+      - "fwilhe2"
+    schedule:
+      interval: 'weekly'
   - package-ecosystem: 'gradle'
     directory: '/'
     assignees:
