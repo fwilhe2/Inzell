@@ -11,7 +11,7 @@ repositories {
 }
 
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(25)
     jvm()
     js(IR) {
         nodejs()
