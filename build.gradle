@@ -1,5 +1,5 @@
 plugins {
-    id 'org.jetbrains.kotlin.multiplatform' version '1.9.24'
+    id 'org.jetbrains.kotlin.multiplatform' version '2.0.21'
     id 'maven-publish'
 }
 
@@ -8,10 +8,10 @@ version System.getenv("VERSION") ?: '0.0.3.norelease'
 
 repositories {
     mavenCentral()
-    jcenter()
 }
 
 kotlin {
+    jvmToolchain(17)
     jvm()
     js(IR) {
         nodejs()
@@ -20,24 +20,12 @@ kotlin {
 
     sourceSets {
         commonMain {
-            dependencies {
-                implementation kotlin('stdlib-common')
-            }
-        }
-
-        jsMain {
-            dependencies {
-                // implementation("org.jetbrains.kotlinx:kotlinx-browser:0.2")
-            }
+            dependencies {}
         }
 
         commonTest {
             dependencies {
                 implementation kotlin('test')
-                // implementation kotlin('test-js')
-                implementation kotlin('test-common')
-                implementation kotlin('test-junit')
-                implementation kotlin('test-annotations-common')
             }
         }
     }
