@@ -39,7 +39,7 @@ private fun String.escapeCsv(): String {
     return "\"${replace("\"", "\"\"")}\""
 }
 
-class CsvPrinter(sheet: Sheet) : SpreadsheetPrinter(sheet) {
+class CsvPrinter(sheet: Sheet, numberOfRows: Int = 10) : SpreadsheetPrinter(sheet, numberOfRows) {
     override fun toString(): String {
         val stringBuilder = StringBuilder()
         stringBuilder.append(sheet.columns.joinToString(separator = ";") { column -> column.title.escapeCsv() }).append("\n")
@@ -51,7 +51,7 @@ class CsvPrinter(sheet: Sheet) : SpreadsheetPrinter(sheet) {
     }
 }
 
-class MarkdownPrinter(sheet: Sheet) : SpreadsheetPrinter(sheet) {
+class MarkdownPrinter(sheet: Sheet, numberOfRows: Int = 10) : SpreadsheetPrinter(sheet, numberOfRows) {
     override fun toString(): String {
         val stringBuilder = StringBuilder()
         stringBuilder.append(sheet.columns.joinToString(separator = " | ") { column -> column.title }).append("\n")
@@ -66,7 +66,7 @@ class MarkdownPrinter(sheet: Sheet) : SpreadsheetPrinter(sheet) {
     }
 }
 
-class HtmlPrinter(sheet: Sheet) : SpreadsheetPrinter(sheet) {
+class HtmlPrinter(sheet: Sheet, numberOfRows: Int = 10) : SpreadsheetPrinter(sheet, numberOfRows) {
     override fun toString(): String {
         val stringBuilder = StringBuilder()
         stringBuilder.appendLine("<table>")
