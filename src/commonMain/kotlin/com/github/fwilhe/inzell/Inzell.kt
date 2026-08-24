@@ -108,11 +108,16 @@ interface Spreadsheet {
     fun add(column: Column)
 }
 
-//todo handle case when i >= values.size()
-fun buildFunctionOf(values: Array<Any>): columnFunction = { i: Int ->
-    values[i]
+fun buildFunctionOf(values: Array<Any>): columnFunction {
+    val snapshot = values.copyOf()
+    return { i: Int ->
+        snapshot.getOrElse(i) { throw IndexOutOfBoundsException("Row index $i is outside the data range") }
+    }
 }
 
-fun buildFunctionOf(values: Collection<Any>): columnFunction = { i: Int ->
-    values.elementAt(i)
+fun buildFunctionOf(values: Collection<Any>): columnFunction {
+    val snapshot = values.toList()
+    return { i: Int ->
+        snapshot.getOrElse(i) { throw IndexOutOfBoundsException("Row index $i is outside the data range") }
+    }
 }
