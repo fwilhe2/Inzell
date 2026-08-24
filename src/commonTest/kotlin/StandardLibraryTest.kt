@@ -5,6 +5,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
+import kotlin.test.assertFailsWith
 class StandardLibraryTest {
     @Test
     fun even() {
@@ -31,5 +32,13 @@ class StandardLibraryTest {
     fun powerOfTwo() {
         assertEquals(1.0, powerOfTwo(0))
         assertEquals(8.0, powerOfTwo(3))
+    }
+
+    @Test
+    fun buildFunctionOfValidatesRows() {
+        val function = buildFunctionOf(listOf<Any>("first", "second"))
+
+        assertEquals("second", function(1))
+        assertFailsWith<IndexOutOfBoundsException> { function(2) }
     }
 }
