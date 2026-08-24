@@ -9,7 +9,9 @@ class Column(val title: String, private val function: columnFunction) {
     fun evalString(i: Int): String = function.invoke(i) as String
 }
 
-class Sheet(val columns: List<Column>, val caption: String = "(No caption provided)") {
+class Sheet(columns: List<Column>, val caption: String = "(No caption provided)") {
+    val columns: List<Column> = columns.toList()
+
     fun row(index: Int): List<Any> = columns.map { it.eval(index) }
     fun title(index: Int): String = columns[index].title
     fun forEachFunction(function: (Column) -> Unit) {
