@@ -88,6 +88,17 @@ class SheetsTest {
 
         assertEquals("row\n1\n2\n", CsvPrinter(sheet, 2).toString())
         assertEquals("row\n---\n1  \n2  \n", MarkdownPrinter(sheet, 2).toString())
-        assertEquals(2, HtmlPrinter(sheet, 2).toString().split("<tr>").size - 2)
+        assertEquals(2, HtmlPrinter(sheet, 2).toString().split("<tr>").size - 2)   
+    }
+
+    fun csvPrinterEscapesFields() {
+        val sheet = spreadsheet {
+            column("Title;\"quoted\"") { "Value;\"quoted\"\nnext" }
+        }
+
+        val csv = CsvPrinter(sheet).toString()
+
+        assertEquals(true, csv.startsWith("\"Title;\"\"quoted\"\"\"\n"))
+        assertEquals(true, csv.contains("\"Value;\"\"quoted\"\"\nnext\""))
     }
 }

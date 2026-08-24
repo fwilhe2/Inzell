@@ -32,12 +32,19 @@ private fun String.escapeHtml(): String = replace("&", "&amp;")
     .replace("<", "&lt;")
     .replace(">", "&gt;")
 
+private fun String.escapeCsv(): String {
+    if (!contains(';') && !contains('"') && !contains('\n') && !contains('\r')) {
+        return this
+    }
+    return "\"${replace("\"", "\"\"")}\""
+}
+
 class CsvPrinter(sheet: Sheet, numberOfRows: Int = 10) : SpreadsheetPrinter(sheet, numberOfRows) {
     override fun toString(): String {
         val stringBuilder = StringBuilder()
-        stringBuilder.append(sheet.columns.joinToString(separator = ";") { column -> column.title }).append("\n")
+        stringBuilder.append(sheet.columns.joinToString(separator = ";") { column -> column.title.escapeCsv() }).append("\n")
         for (row in 1..numberOfRows){
-            stringBuilder.append(sheet.columns.map { column -> column.eval(row) }.joinToString(separator = ";"))
+            stringBuilder.append(sheet.columns.map { column -> column.eval(row).toString().escapeCsv() }.joinToString(separator = ";"))
                 .append("\n")
         }
         return stringBuilder.toString()
@@ -108,11 +115,16 @@ interface Spreadsheet {
     fun add(column: Column)
 }
 
-//todo handle case when i >= values.size()
-fun buildFunctionOf(values: Array<Any>): columnFunction = { i: Int ->
-    values[i]
+fun buildFunctionOf(values: Array<Any>): columnFunction {
+    val snapshot = values.copyOf()
+    return { i: Int ->
+        snapshot.getOrElse(i) { throw IndexOutOfBoundsException("Row index $i is outside the data range") }
+    }
 }
 
-fun buildFunctionOf(values: Collection<Any>): columnFunction = { i: Int ->
-    values.elementAt(i)
+fun buildFunctionOf(values: Collection<Any>): columnFunction {
+    val snapshot = values.toList()
+    return { i: Int ->
+        snapshot.getOrElse(i) { throw IndexOutOfBoundsException("Row index $i is outside the data range") }
+    }
 }
