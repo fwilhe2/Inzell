@@ -65,4 +65,18 @@ class SheetsTest {
         MarkdownPrinter(sheet).printToStandardOut()
         HtmlPrinter(sheet).printToStandardOut()
     }
+
+    @Test
+    fun htmlPrinterEscapesText() {
+        val sheet = spreadsheet {
+            caption("Caption & <tag>")
+            column("Title <&>") { "Value & <tag>" }
+        }
+
+        val html = HtmlPrinter(sheet).toString()
+
+        assertEquals(true, html.contains("Caption &amp; &lt;tag&gt;"))
+        assertEquals(true, html.contains("Title &lt;&amp;&gt;"))
+        assertEquals(true, html.contains("Value &amp; &lt;tag&gt;"))
+    }
 }
