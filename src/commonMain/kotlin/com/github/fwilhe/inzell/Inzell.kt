@@ -26,6 +26,10 @@ abstract class SpreadsheetPrinter(val sheet: Sheet, val numberOfRows: Int = 10) 
     }
 }
 
+private fun String.escapeHtml(): String = replace("&", "&amp;")
+    .replace("<", "&lt;")
+    .replace(">", "&gt;")
+
 class CsvPrinter(sheet: Sheet) : SpreadsheetPrinter(sheet) {
     override fun toString(): String {
         val stringBuilder = StringBuilder()
@@ -57,16 +61,16 @@ class HtmlPrinter(sheet: Sheet) : SpreadsheetPrinter(sheet) {
     override fun toString(): String {
         val stringBuilder = StringBuilder()
         stringBuilder.appendLine("<table>")
-        stringBuilder.appendLine("  <caption>${sheet.caption}</caption>")
+        stringBuilder.appendLine("  <caption>${sheet.caption.escapeHtml()}</caption>")
         stringBuilder.appendLine("  <tr>")
         repeat(sheet.columns.size) { colIndex ->
-            stringBuilder.appendLine("    <th>${sheet.columns[colIndex].title}</th>")
+            stringBuilder.appendLine("    <th>${sheet.columns[colIndex].title.escapeHtml()}</th>")
         }
         stringBuilder.appendLine("  </tr>")
         for (row in 1..numberOfRows){
             stringBuilder.appendLine("  <tr>")
             sheet.columns.forEach {
-                stringBuilder.appendLine("    <td>${it.eval(row)}</td>")
+                stringBuilder.appendLine("    <td>${it.eval(row).toString().escapeHtml()}</td>")
             }
             stringBuilder.appendLine("  </tr>")
         }
