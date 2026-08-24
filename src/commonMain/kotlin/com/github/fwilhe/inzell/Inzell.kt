@@ -32,12 +32,19 @@ private fun String.escapeHtml(): String = replace("&", "&amp;")
     .replace("<", "&lt;")
     .replace(">", "&gt;")
 
+private fun String.escapeCsv(): String {
+    if (!contains(';') && !contains('"') && !contains('\n') && !contains('\r')) {
+        return this
+    }
+    return "\"${replace("\"", "\"\"")}\""
+}
+
 class CsvPrinter(sheet: Sheet) : SpreadsheetPrinter(sheet) {
     override fun toString(): String {
         val stringBuilder = StringBuilder()
-        stringBuilder.append(sheet.columns.joinToString(separator = ";") { column -> column.title }).append("\n")
+        stringBuilder.append(sheet.columns.joinToString(separator = ";") { column -> column.title.escapeCsv() }).append("\n")
         for (row in 1..numberOfRows){
-            stringBuilder.append(sheet.columns.map { column -> column.eval(row) }.joinToString(separator = ";"))
+            stringBuilder.append(sheet.columns.map { column -> column.eval(row).toString().escapeCsv() }.joinToString(separator = ";"))
                 .append("\n")
         }
         return stringBuilder.toString()

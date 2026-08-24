@@ -79,4 +79,16 @@ class SheetsTest {
         assertEquals(true, html.contains("Title &lt;&amp;&gt;"))
         assertEquals(true, html.contains("Value &amp; &lt;tag&gt;"))
     }
+
+    @Test
+    fun csvPrinterEscapesFields() {
+        val sheet = spreadsheet {
+            column("Title;\"quoted\"") { "Value;\"quoted\"\nnext" }
+        }
+
+        val csv = CsvPrinter(sheet).toString()
+
+        assertEquals(true, csv.startsWith("\"Title;\"\"quoted\"\"\"\n"))
+        assertEquals(true, csv.contains("\"Value;\"\"quoted\"\"\nnext\""))
+    }
 }
