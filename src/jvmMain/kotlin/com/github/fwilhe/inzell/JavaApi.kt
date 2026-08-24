@@ -14,5 +14,5 @@ class SpreadsheetBuilder() {
         return this
     }
 
-    fun build(): Sheet = Sheet(columns, theCaption)
+    fun build(): Sheet = Sheet(columns.toList(), theCaption)
 }
