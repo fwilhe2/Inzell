@@ -79,4 +79,15 @@ class SheetsTest {
         assertEquals(true, html.contains("Title &lt;&amp;&gt;"))
         assertEquals(true, html.contains("Value &amp; &lt;tag&gt;"))
     }
+
+    @Test
+    fun printersAcceptRowCount() {
+        val sheet = spreadsheet {
+            column("row") { it }
+        }
+
+        assertEquals("row\n1\n2\n", CsvPrinter(sheet, 2).toString())
+        assertEquals("row\n---\n1  \n2  \n", MarkdownPrinter(sheet, 2).toString())
+        assertEquals(2, HtmlPrinter(sheet, 2).toString().split("<tr>").size - 2)
+    }
 }
