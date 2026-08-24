@@ -1,6 +1,7 @@
 package com.github.fwilhe.inzell
 
 import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
@@ -24,5 +25,11 @@ class StandardLibraryTest {
         assertFalse(isPrime(6))
         assertTrue(isPrime(7))
         assertFalse(isPrime(8))
+    }
+
+    @Test
+    fun powerOfTwo() {
+        assertEquals(1.0, powerOfTwo(0))
+        assertEquals(8.0, powerOfTwo(3))
     }
 }
