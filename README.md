@@ -64,9 +64,21 @@ Be sure to configure the GitHub repo in maven.
 
 The library depends on the Kotlin standard library.
 
+For browser applications, include the JS artifact and call `browserPrint` with
+the page document:
+
+```kotlin
+HtmlPrinter(sheet).browserPrint(document)
+```
+
+The browser renderer creates the controls and table in `document.body` and
+uses DOM text content for cell values.
+
 ## Building
 
 To install the library to your local Maven repo, type `./gradlew publishToMavenLocal` in the project root.
+
+To verify the browser target locally, type `./gradlew compileKotlinJs` in the project root.
 
 ## License
 
